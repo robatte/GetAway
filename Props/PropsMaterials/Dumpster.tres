@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bd41phqjpcb0u"]
+
+[resource]
+resource_name = "Dumpster"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.0850105, 0.0924606, 0.262927, 1)
+roughness = 0.254386

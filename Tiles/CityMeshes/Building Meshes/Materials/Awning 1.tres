@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dkr4xf6lc0rlx"]
+
+[resource]
+resource_name = "Awning 1"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.819098, 0.906332, 0.257789, 1)
+roughness = 0.5

@@ -1,0 +1,87 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://11qhqc8fvot"
+path="res://.godot/imported/Props.glb-95d285781dd8b9c6e7974ddbc84cb400.scn"
+
+[deps]
+
+source_file="res://Props/Props.glb"
+dest_files=["res://.godot/imported/Props.glb-95d285781dd8b9c6e7974ddbc84cb400.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"materials": {
+"Chair Seat": {
+"use_external/enabled": true,
+"use_external/path": "res://Props/PropsMaterials/Chair Seat.tres"
+},
+"Cone": {
+"use_external/enabled": true,
+"use_external/path": "res://Props/PropsMaterials/Cone.tres"
+},
+"ConeBase": {
+"use_external/enabled": true,
+"use_external/path": "res://Props/PropsMaterials/ConeBase.tres"
+},
+"ConeReflector": {
+"use_external/enabled": true,
+"use_external/path": "res://Props/PropsMaterials/ConeReflector.tres"
+},
+"Dumpster": {
+"use_external/enabled": true,
+"use_external/path": "res://Props/PropsMaterials/Dumpster.tres"
+},
+"FireHydrant": {
+"use_external/enabled": true,
+"use_external/path": "res://Props/PropsMaterials/FireHydrant.tres"
+},
+"Material.001": {
+"use_external/enabled": true,
+"use_external/path": "res://Props/PropsMaterials/Material.001.tres"
+},
+"Material.002": {
+"use_external/enabled": true,
+"use_external/path": "res://Props/PropsMaterials/Material.002.tres"
+},
+"Material.003": {
+"use_external/enabled": true,
+"use_external/path": "res://Props/PropsMaterials/Material.003.tres"
+},
+"MetalFurniture": {
+"use_external/enabled": true,
+"use_external/path": "res://Props/PropsMaterials/MetalFurniture.tres"
+},
+"MetalSteel": {
+"use_external/enabled": true,
+"use_external/path": "res://Props/PropsMaterials/MetalSteel.tres"
+},
+"Table Top": {
+"use_external/enabled": true,
+"use_external/path": "res://Props/PropsMaterials/Table Top.tres"
+},
+"Wood": {
+"use_external/enabled": true,
+"use_external/path": "res://Props/PropsMaterials/Wood.tres"
+}
+}
+}
+gltf/embedded_image_handling=1

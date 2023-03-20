@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5o0kpwn4ev2r"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_dqm6k"]
+[ext_resource type="ArrayMesh" uid="uid://b45oru3tx1hip" path="res://Player/Meshes/RobberCar.mesh" id="2_dmaj2"]
+[ext_resource type="ArrayMesh" uid="uid://be5adprxvcfl" path="res://Player/Meshes/PoliceCar.mesh" id="3_fqns6"]
+[ext_resource type="ArrayMesh" uid="uid://brv4b37ifgbfb" path="res://Player/Meshes/Tire.mesh" id="3_gaa44"]
+[ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="4_eoxq5"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vgxy8"]
+points = PackedVector3Array(0.627165, 1.4824, -1.39729, 1.01683, -0.117202, -1.84489, -0.881354, 0.0460728, 2.01177, -0.524346, 1.4707, 0.14623, -0.917121, -0.117202, -1.98336, 0.326033, -0.186337, 1.19332, -0.666214, 1.48855, -1.27838, -0.986337, 0.642781, 1.67711, 0.671332, 0.918816, 1.88395, 0.8932, 0.0591935, 1.97035, 0.508923, 1.43403, -1.75718, -0.157307, 0.987782, 1.95319, 0.94761, 0.366408, -2.05216, 0.532424, 1.43774, 0.140977, 1.01683, 0.573646, 1.40059, -0.917121, 0.366408, -2.05216, -0.986337, -0.117202, 0.571914, -0.488213, 1.44902, -1.79238, 0.326033, 0.366408, -2.19064, 1.01683, -0.117202, 0.571914, 0.247197, 0.0465166, 2.14385, 0.690981, 1.48174, -1.20296, -0.640843, 0.918816, 1.88395, -0.364564, -0.186337, 1.19332, -0.709863, 0.228137, 2.1609, 0.94761, 0.228137, 2.09123, 0.878589, -0.117202, -1.98336, -0.280134, -0.143526, 1.66032, -0.295544, 0.366408, -2.19064, 0.94761, 0.642781, 1.81515, -0.986337, 0.366408, 1.95319, 0.118775, 0.987782, 1.95319)
+
+[node name="Player" type="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.397382, 0)
+mass = 70.0
+continuous_cd = true
+script = ExtResource("1_dqm6k")
+
+[node name="RobberMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.307081, 0)
+mesh = ExtResource("2_dmaj2")
+
+[node name="PoliceMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.405674, 0)
+mesh = ExtResource("3_fqns6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.307081, 0)
+shape = SubResource("ConvexPolygonShape3D_vgxy8")
+
+[node name="WheelFrontLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.555896, 1.48342)
+use_as_traction = true
+use_as_steering = true
+wheel_roll_influence = 1.0
+wheel_radius = 0.4
+wheel_rest_length = 0.3
+suspension_stiffness = 50.0
+suspension_max_force = 500.0
+damping_compression = 1.0
+damping_relaxation = 4.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelFrontLeft"]
+transform = Transform3D(1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("3_gaa44")
+
+[node name="WheelFrontRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0.555622, 1.483)
+use_as_traction = true
+use_as_steering = true
+wheel_roll_influence = 1.0
+wheel_radius = 0.4
+wheel_rest_length = 0.3
+suspension_stiffness = 50.0
+suspension_max_force = 500.0
+damping_compression = 1.0
+damping_relaxation = 4.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelFrontRight"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+mesh = ExtResource("3_gaa44")
+
+[node name="WheelRearLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.555896, -1.21419)
+wheel_roll_influence = 1.0
+wheel_radius = 0.4
+wheel_rest_length = 0.3
+suspension_stiffness = 50.0
+suspension_max_force = 500.0
+damping_compression = 1.0
+damping_relaxation = 4.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelRearLeft"]
+transform = Transform3D(1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("3_gaa44")
+
+[node name="WheelRearRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0.555622, -1.214)
+wheel_roll_influence = 1.0
+wheel_radius = 0.4
+wheel_rest_length = 0.3
+suspension_stiffness = 50.0
+suspension_max_force = 500.0
+damping_compression = 1.0
+damping_relaxation = 4.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelRearRight"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+mesh = ExtResource("3_gaa44")
+
+[node name="SmoothCamera" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.89117, 0)
+top_level = true
+doppler_tracking = 2
+current = true
+script = ExtResource("4_eoxq5")
+target_path = NodePath("..")
+offset = Vector3(0, 2, -5)

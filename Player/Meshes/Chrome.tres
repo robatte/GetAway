@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bltrvss5ttm2v"]
+
+[resource]
+resource_name = "Chrome"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 1)
+metallic = 1.0
+roughness = 0.142202

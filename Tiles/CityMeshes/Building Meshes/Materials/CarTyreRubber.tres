@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b8mmul3uy27hb"]
+
+[resource]
+resource_name = "CarTyreRubber"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.0493139, 0.0493139, 0.0493139, 1)

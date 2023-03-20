@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bso0y1enrd675"]
+
+[resource]
+resource_name = "Lights.002"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+metallic = 1.0
+emission_enabled = true
+emission = Color(1, 0.67451, 0.411765, 1)

@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://us5emiwq3uvs"]
+
+[resource]
+resource_name = "Door 1"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.231669, 0.443845, 0.498593, 1)
+roughness = 0.5

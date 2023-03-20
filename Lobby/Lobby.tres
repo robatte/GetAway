@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://buv5pymjub15j"]
+
+[ext_resource type="FontFile" uid="uid://cv4un0jhof24h" path="res://Fonts/FashionVictim.ttf" id="1_t10fx"]
+
+[resource]
+default_font = ExtResource("1_t10fx")
+default_font_size = 32

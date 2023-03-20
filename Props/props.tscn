@@ -1,0 +1,25 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" uid="uid://b7la3pl4gy2hk" path="res://Props/Hydrants/FireHydrant.tscn" id="1_wl3j7"]
+[ext_resource type="PackedScene" uid="uid://jd7xry7mjh76" path="res://Props/Dumpsters/DumpsterProp.tscn" id="2_d4ro5"]
+[ext_resource type="PackedScene" uid="uid://nepdgc7dkbki" path="res://Props/TrafficCones/Cone.tscn" id="3_ga8qq"]
+[ext_resource type="PackedScene" uid="uid://cgcs4m4n8yaxf" path="res://Props/Cafe/CafeTable.tscn" id="4_ibfjf"]
+[ext_resource type="PackedScene" uid="uid://dnf7i340qxl77" path="res://Props/Cafe/CafeChair.tscn" id="5_p70le"]
+[ext_resource type="PackedScene" uid="uid://b18m2v5fllyef" path="res://Props/Zeppelin/Zeppelin.tscn" id="6_y2a1a"]
+[ext_resource type="PackedScene" uid="uid://cml6tavjdoa83" path="res://Props/StreeLights/StreetLamp.tscn" id="7_nc662"]
+
+[node name="Props" type="Node3D"]
+
+[node name="Fire Hydrant -rigid" parent="." instance=ExtResource("1_wl3j7")]
+
+[node name="Dumpster" parent="." instance=ExtResource("2_d4ro5")]
+
+[node name="Cone -rigid" parent="." instance=ExtResource("3_ga8qq")]
+
+[node name="CafeTable -rigid" parent="." instance=ExtResource("4_ibfjf")]
+
+[node name="CafeChair -rigid" parent="." instance=ExtResource("5_p70le")]
+
+[node name="Zeppelin " parent="." instance=ExtResource("6_y2a1a")]
+
+[node name="StreetLamp " parent="." instance=ExtResource("7_nc662")]

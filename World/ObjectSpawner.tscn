@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bh4jl8wyx0s61"]
+
+[ext_resource type="Script" path="res://World/ObjectSpawner.gd" id="1_oqd3g"]
+[ext_resource type="Script" path="res://World/ObjectRotationLookup.gd" id="2_f668h"]
+
+[node name="ObjectSpawner" type="Node"]
+script = ExtResource("1_oqd3g")
+
+[node name="ObjectRotationLookup" type="Node" parent="."]
+script = ExtResource("2_f668h")

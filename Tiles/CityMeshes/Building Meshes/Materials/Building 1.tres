@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://eri3vikhra1g"]
+
+[resource]
+resource_name = "Building 1"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.543099, 0.182037, 0.173093, 1)

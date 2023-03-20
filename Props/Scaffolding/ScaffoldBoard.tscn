@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cd2b5ugcgwr2s"]
+
+[ext_resource type="Material" uid="uid://d4aedb3ropahv" path="res://Props/PropsMaterials/Wood.tres" id="1_y57ay"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bhvtt"]
+material = ExtResource("1_y57ay")
+size = Vector3(1.6, 0.125, 12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6aukl"]
+size = Vector3(1.6, 0.125, 12)
+
+[node name="ScaffoldBoard" type="RigidBody3D"]
+custom_integrator = true
+sleeping = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_bhvtt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_6aukl")

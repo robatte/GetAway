@@ -1,0 +1,119 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://1btjqprn23qj"
+path="res://.godot/imported/Buildings.glb-7deb2c51d0de4b6fa7859120e7f552c7.scn"
+
+[deps]
+
+source_file="res://Tiles/CityMeshes/Building Meshes/Buildings.glb"
+dest_files=["res://.godot/imported/Buildings.glb-7deb2c51d0de4b6fa7859120e7f552c7.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"materials": {
+"Awning 1": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Awning 1.tres"
+},
+"Awning 2": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Awning 2.tres"
+},
+"Black Paint": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Black Paint.tres"
+},
+"Body Paint": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Body Paint.tres"
+},
+"Body Paint White": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Body Paint White.tres"
+},
+"Building 1": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Building 1.tres"
+},
+"Building 2": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Building 2.tres"
+},
+"Building 3": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Building 3.tres"
+},
+"CarBodyBlue": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/CarBodyBlue.tres"
+},
+"CarBodyDarkBlue": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/CarBodyDarkBlue.tres"
+},
+"CarBodyGreen": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/CarBodyGreen.tres"
+},
+"CarTyreRubber": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/CarTyreRubber.tres"
+},
+"Chrome": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Chrome.tres"
+},
+"Concrete": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Concrete.tres"
+},
+"Door 1": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Door 1.tres"
+},
+"Door 2": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Door 2.tres"
+},
+"Glass": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Glass.tres"
+},
+"Glass.001": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Glass.001.tres"
+},
+"Lights": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Lights.tres"
+},
+"Rails": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Rails.tres"
+},
+"Windows": {
+"use_external/enabled": true,
+"use_external/path": "res://Tiles/CityMeshes/Building Meshes/Materials/Windows.tres"
+}
+}
+}
+gltf/embedded_image_handling=1

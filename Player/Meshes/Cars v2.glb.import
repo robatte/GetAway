@@ -1,0 +1,103 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://c44nmgu6h41oq"
+path="res://.godot/imported/Cars v2.glb-26f0a3063daf913a6dc55b604671b818.scn"
+
+[deps]
+
+source_file="res://Player/Meshes/Cars v2.glb"
+dest_files=["res://.godot/imported/Cars v2.glb-26f0a3063daf913a6dc55b604671b818.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"materials": {
+"Black Paint": {
+"use_external/enabled": true,
+"use_external/path": "res://Player/Meshes/Black Paint.tres"
+},
+"Body Paint": {
+"use_external/enabled": true,
+"use_external/path": "res://Player/Meshes/Body Paint.tres"
+},
+"Body Paint Blue": {
+"use_external/enabled": true,
+"use_external/path": "res://Player/Meshes/Body Paint Blue.tres"
+},
+"Body Paint White": {
+"use_external/enabled": true,
+"use_external/path": "res://Player/Meshes/Body Paint White.tres"
+},
+"Chrome": {
+"use_external/enabled": true,
+"use_external/path": "res://Player/Meshes/Chrome.tres"
+},
+"Glass": {
+"use_external/enabled": true,
+"use_external/path": "res://Player/Meshes/Glass.tres"
+},
+"Lights": {
+"use_external/enabled": true,
+"use_external/path": "res://Player/Meshes/Lights.tres"
+},
+"Lights.002": {
+"use_external/enabled": true,
+"use_external/path": "res://Player/Meshes/Lights.002.tres"
+},
+"Rubber": {
+"use_external/enabled": true,
+"use_external/path": "res://Player/Meshes/Rubber.tres"
+}
+},
+"meshes": {
+"Cars v2_Cube000": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Player/Meshes/PoliceCar.mesh.res"
+},
+"Cars v2_Cube002": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Player/Meshes/RobberCar.mesh.res"
+},
+"Cars v2_Cylinder": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Player/Meshes/Cars v2_Cylinder.res"
+}
+}
+}
+gltf/embedded_image_handling=1
