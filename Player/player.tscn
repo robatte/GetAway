@@ -11,6 +11,7 @@ points = PackedVector3Array(0.627165, 1.4824, -1.39729, 1.01683, -0.117202, -1.8
 
 [node name="Player" type="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.397382, 0)
+collision_mask = 7
 mass = 70.0
 continuous_cd = true
 script = ExtResource("1_dqm6k")

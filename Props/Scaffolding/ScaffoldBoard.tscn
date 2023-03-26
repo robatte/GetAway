@@ -10,7 +10,8 @@ size = Vector3(1.6, 0.125, 12)
 size = Vector3(1.6, 0.125, 12)
 
 [node name="ScaffoldBoard" type="RigidBody3D"]
-custom_integrator = true
+gravity_scale = 0.0
+continuous_cd = true
 sleeping = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

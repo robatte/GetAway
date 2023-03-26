@@ -27,6 +27,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 9, -9.868)
 [node name="ScaffoldPole6" parent="." instance=ExtResource("1_vcko8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 9, -8.26797)
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [node name="ScaffoldBoard" parent="." instance=ExtResource("2_3qa88")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 5, -9.085)
 
@@ -99,9 +103,16 @@ transform = Transform3D(0.250853, 0.968025, 0, -0.968025, 0.250853, 0, 0, 0, 1, 
 [node name="ScaffoldBar4" parent="." instance=ExtResource("4_qefb5")]
 transform = Transform3D(-0.221072, 0.975258, 0, -0.975258, -0.221072, 0, 0, 0, 1, 0, 15.5214, -8.12693)
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
-one_shot = true
-
+[connection signal="body_entered" from="ScaffoldPole" to="." method="_on_scaffold_pole_body_entered"]
 [connection signal="sleeping_state_changed" from="ScaffoldPole" to="." method="_on_scaffold_pole_sleeping_state_changed"]
+[connection signal="body_entered" from="ScaffoldPole2" to="." method="_on_scaffold_pole_body_entered"]
+[connection signal="sleeping_state_changed" from="ScaffoldPole2" to="." method="_on_scaffold_pole_sleeping_state_changed"]
+[connection signal="body_entered" from="ScaffoldPole3" to="." method="_on_scaffold_pole_body_entered"]
+[connection signal="sleeping_state_changed" from="ScaffoldPole3" to="." method="_on_scaffold_pole_sleeping_state_changed"]
+[connection signal="body_entered" from="ScaffoldPole4" to="." method="_on_scaffold_pole_body_entered"]
+[connection signal="sleeping_state_changed" from="ScaffoldPole4" to="." method="_on_scaffold_pole_sleeping_state_changed"]
+[connection signal="body_entered" from="ScaffoldPole5" to="." method="_on_scaffold_pole_body_entered"]
+[connection signal="sleeping_state_changed" from="ScaffoldPole5" to="." method="_on_scaffold_pole_sleeping_state_changed"]
+[connection signal="body_entered" from="ScaffoldPole6" to="." method="_on_scaffold_pole_body_entered"]
+[connection signal="sleeping_state_changed" from="ScaffoldPole6" to="." method="_on_scaffold_pole_sleeping_state_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

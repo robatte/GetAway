@@ -8,6 +8,9 @@ func _on_timer_timeout():
 	
 func _on_scaffold_pole_sleeping_state_changed():
 	if not $ScaffoldPole.sleeping and has_finished_spawning:
-		$Timer.start()
-	else:
+		if $Timer.is_stopped():
+			$Timer.start()
+
+func _on_scaffold_pole_body_entered(body: Node) -> void:
+	if body is GridMap and not has_finished_spawning:
 		has_finished_spawning = true

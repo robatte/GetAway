@@ -63,9 +63,16 @@ brake={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="City"
+3d_physics/layer_2="Criminals"
+3d_physics/layer_3="Cops"
+
 [physics]
 
 3d/run_on_separate_thread=true
+3d/physics_engine="GodotPhysics3D"
 
 [rendering]
 

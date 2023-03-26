@@ -28,8 +28,7 @@ func _ready():
 		make_map_border()
 		make_map()
 		record_tile_position()
-		
-	if Network.local_player_id == 1:
+	elif Network.local_player_id == 1:
 		make_map_border()
 		make_map()
 		record_tile_position()

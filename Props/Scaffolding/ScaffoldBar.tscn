@@ -15,7 +15,8 @@ height = 12.0
 radius = 0.125
 
 [node name="ScaffoldBar" type="RigidBody3D"]
-custom_integrator = true
+gravity_scale = 0.0
+continuous_cd = true
 sleeping = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
