@@ -45,7 +45,7 @@ func add_to_player_list():
 
 func _connected_to_server(_id):
 	add_to_player_list()
-	rpc("_send_player_info", local_player_id, player_data)
+	rpc("_send_player_info", local_player_id, player_data, is_cop)
 	
 @rpc("any_peer")
 func _send_player_info(id, player_info, cop_mode):
@@ -57,7 +57,6 @@ func _send_player_info(id, player_info, cop_mode):
 
 @rpc
 func _update_players(player_info):
-#	dlog("_updates_players.")
 	players = player_info
 
 func _on_player_connected(_id):
