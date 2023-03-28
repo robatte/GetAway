@@ -11,7 +11,7 @@ var steer_target = 0.0
 var steer_angle = 0.0
 
 var players = {}
-var player_data = {"steer": 0, "engine": 0, "brakes": 0, "position": null}
+var player_data = {"steer": 0, "engine": 0, "brakes": 0, "position": null, "speed": 0}
 
 func _ready():
 	join_team()
@@ -20,6 +20,7 @@ func _ready():
 	
 	if not is_local_Player():
 		$SmoothCamera.queue_free()
+		$Gui.queue_free()
 	
 func is_local_Player():
 	return name == str(Network.local_player_id)
@@ -27,6 +28,7 @@ func is_local_Player():
 func join_team():
 	if Network.players[int(str(name))]["is_cop"]:
 		add_to_group("cops")
+		collision_layer = 4
 		$RobberMesh.queue_free()
 	else:
 		$PoliceMesh.queue_free()
@@ -35,6 +37,7 @@ func join_team():
 func _physics_process(delta):
 	if is_local_Player():
 		drive(delta)
+		display_location()
 	if not multiplayer.is_server():
 		transform = players[name].position
 		
@@ -43,11 +46,12 @@ func _physics_process(delta):
 	brake = players[name].brakes
 	
 func drive(delta):
+	var speed = players[name].speed
 	var steering_value = apply_steering(delta)
-	var throttle = apply_throttle(delta)
+	var throttle = apply_throttle(delta, speed)
 	var brakes = apply_brakes(delta)
 	
-	update_server(name, steering_value, throttle, brakes)
+	update_server(name, steering_value, throttle, brakes, speed)
 	
 func apply_steering(delta):
 	var steer_val = 0
@@ -68,12 +72,12 @@ func apply_steering(delta):
 		
 	return steer_angle
 
-func apply_throttle(_delta):
+func apply_throttle(_delta, speed):
 	var throttle_val = 0
 	var forward = Input.get_action_strength("forward")	
 	var backward = Input.get_action_strength("backward")	
 	
-	if linear_velocity.length() < MAX_SPEED:
+	if speed < MAX_SPEED:
 		if backward:
 			throttle_val = -backward
 		elif forward:
@@ -94,16 +98,24 @@ func apply_brakes(_delta):
 func update_players(player_infos):
 	players = player_infos
 
-func update_server(id, steering_value, throttle, brakes):
+func update_server(id, steering_value, throttle, brakes, speed):
 	if not multiplayer.is_server():
-		rpc("manage_clients", id, steering_value, throttle, brakes)
+		rpc("manage_clients", id, steering_value, throttle, brakes, speed)
 	else:
-		manage_clients(id, steering_value, throttle, brakes)
+		manage_clients(id, steering_value, throttle, brakes, speed)
+	get_tree().call_group("Interface", "update_speed", speed)
 	
 @rpc("any_peer", "unreliable")
-func manage_clients(id, steering_value, throttle, brakes):
+func manage_clients(id, steering_value, throttle, brakes, speed):
 	players[id].steer = steering_value
 	players[id].engine = throttle
 	players[id].brakes = brakes
 	players[id].position = transform
+	players[id].speed = linear_velocity.length()
 	rpc("update_players", players)
+
+func display_location():
+	var x = snapped(position.x, 1)
+	var z = snapped(position.z, 1)
+	
+	$Gui/MarginContainer/ColorRect/VBoxContainer/Location.text = str(x) + ", " + str(z)

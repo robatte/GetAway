@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Save="*res://SaveGame/Save.gd"
 Network="*res://Network/Network.gd"
 Helper="*res://Helper.gd"
+Config="*res://Config.gd"
 
 [debug]
 
@@ -65,6 +66,8 @@ brake={
 
 [layer_names]
 
+3d_render/layer_2="not Minimap"
+3d_render/layer_3="Minimap only"
 3d_physics/layer_1="City"
 3d_physics/layer_2="Criminals"
 3d_physics/layer_3="Cops"

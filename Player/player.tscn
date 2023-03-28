@@ -1,16 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5o0kpwn4ev2r"]
+[gd_scene load_steps=11 format=3 uid="uid://c5o0kpwn4ev2r"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_dqm6k"]
 [ext_resource type="ArrayMesh" uid="uid://b45oru3tx1hip" path="res://Player/Meshes/RobberCar.mesh" id="2_dmaj2"]
 [ext_resource type="ArrayMesh" uid="uid://be5adprxvcfl" path="res://Player/Meshes/PoliceCar.mesh" id="3_fqns6"]
 [ext_resource type="ArrayMesh" uid="uid://brv4b37ifgbfb" path="res://Player/Meshes/Tire.mesh" id="3_gaa44"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="4_eoxq5"]
+[ext_resource type="Script" path="res://Player/Minimap.gd" id="6_hucmv"]
+[ext_resource type="Texture2D" uid="uid://xsldysy1lwih" path="res://Gui/MapFrame.svg" id="6_jpyo1"]
+[ext_resource type="Theme" uid="uid://buv5pymjub15j" path="res://Lobby/Lobby.tres" id="6_luqar"]
+[ext_resource type="StyleBox" uid="uid://bo24lcik86rxc" path="res://Gui/Frame.tres" id="8_bmg1j"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vgxy8"]
 points = PackedVector3Array(0.627165, 1.4824, -1.39729, 1.01683, -0.117202, -1.84489, -0.881354, 0.0460728, 2.01177, -0.524346, 1.4707, 0.14623, -0.917121, -0.117202, -1.98336, 0.326033, -0.186337, 1.19332, -0.666214, 1.48855, -1.27838, -0.986337, 0.642781, 1.67711, 0.671332, 0.918816, 1.88395, 0.8932, 0.0591935, 1.97035, 0.508923, 1.43403, -1.75718, -0.157307, 0.987782, 1.95319, 0.94761, 0.366408, -2.05216, 0.532424, 1.43774, 0.140977, 1.01683, 0.573646, 1.40059, -0.917121, 0.366408, -2.05216, -0.986337, -0.117202, 0.571914, -0.488213, 1.44902, -1.79238, 0.326033, 0.366408, -2.19064, 1.01683, -0.117202, 0.571914, 0.247197, 0.0465166, 2.14385, 0.690981, 1.48174, -1.20296, -0.640843, 0.918816, 1.88395, -0.364564, -0.186337, 1.19332, -0.709863, 0.228137, 2.1609, 0.94761, 0.228137, 2.09123, 0.878589, -0.117202, -1.98336, -0.280134, -0.143526, 1.66032, -0.295544, 0.366408, -2.19064, 0.94761, 0.642781, 1.81515, -0.986337, 0.366408, 1.95319, 0.118775, 0.987782, 1.95319)
 
 [node name="Player" type="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.397382, 0)
+collision_layer = 2
 collision_mask = 7
 mass = 70.0
 continuous_cd = true
@@ -91,8 +96,86 @@ mesh = ExtResource("3_gaa44")
 [node name="SmoothCamera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.89117, 0)
 top_level = true
+cull_mask = 1048571
 doppler_tracking = 2
 current = true
 script = ExtResource("4_eoxq5")
 target_path = NodePath("..")
 offset = Vector3(0, 2, -5)
+
+[node name="Gui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("6_luqar")
+
+[node name="MarginContainer" type="MarginContainer" parent="Gui"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -260.0
+offset_bottom = 260.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="ColorRect" type="ColorRect" parent="Gui/MarginContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Gui/MarginContainer/ColorRect"]
+layout_mode = 2
+offset_right = 250.0
+offset_bottom = 250.0
+
+[node name="Minimap" type="SubViewportContainer" parent="Gui/MarginContainer/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Gui/MarginContainer/ColorRect/VBoxContainer/Minimap"]
+transparent_bg = true
+handle_input_locally = false
+use_taa = true
+size = Vector2i(250, 250)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Gui/MarginContainer/ColorRect/VBoxContainer/Minimap/SubViewport" groups=["Interface"]]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 100, 0)
+current = true
+fov = 70.0
+size = 80.0
+far = 600.0
+script = ExtResource("6_hucmv")
+
+[node name="Location" type="Label" parent="Gui/MarginContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("8_bmg1j")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Gui/MarginContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = -3
+
+[node name="TextureRect" type="TextureRect" parent="Gui/MarginContainer/ColorRect/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("6_jpyo1")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 30, 0)
+layers = 4
+light_energy = 3.0
+spot_range = 50.0
+spot_angle = 10.0
