@@ -85,6 +85,7 @@ height = 1.0
 radius = 0.4
 
 [node name="Cone" type="RigidBody3D"]
+collision_mask = 7
 mass = 0.1
 continuous_cd = true
 max_contacts_reported = 1

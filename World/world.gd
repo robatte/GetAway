@@ -2,6 +2,7 @@ extends Node3D
 
 func _enter_tree():
 	get_tree().paused = true
+	print("World...")
 	
 func spawn_local_player():
 	var new_player = preload("res://Player/player.tscn").instantiate()

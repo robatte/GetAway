@@ -64,6 +64,7 @@ mesh = SubResource("ArrayMesh_d5ldy")
 skeleton = NodePath("")
 
 [node name="Dumpster " type="StaticBody3D" parent="."]
+collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dumpster "]
 shape = SubResource("ConcavePolygonShape3D_d1hmf")

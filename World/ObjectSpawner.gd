@@ -7,42 +7,37 @@ var map_size = Vector2()
 
 const tile_size = 20
 
-const number_of_parked_cars = 100
-const number_of_billboards = 75
-const number_of_traffic_cones = 40
-const number_of_hydrants = 50
-const number_of_street_lights = 50
-const number_of_ramps = 25
-const number_of_scaffolding = 25
-const number_of_cafes = 20
-
-var scene_Scaffolding:Resource = preload("res://Props/Scaffolding/Scaffolding.tscn")
-var scene_ParkedCars:Resource = preload("res://Props/ParkedCars/ParkedCars.tscn")
-var scene_Dumpsters:Resource = preload("res://Props/Dumpsters/Dumpster.tscn")
-var scene_Billboards:Resource = preload("res://Props/Billboards/Billboard.tscn")
-var scene_TrafficCones:Resource = preload("res://Props/TrafficCones/traffic_cone.tscn")
-var scene_StreeLights:Resource = preload("res://Props/StreeLights/StreetLight.tscn")
-var scene_Hydrants:Resource = preload("res://Props/Hydrants/Hydrant.tscn")
-var scene_Cafes:Resource = preload("res://Props/Cafe/Cafe.tscn")
-
 func generate_props(tile_list, size:Vector2, plazas):
 	tiles = tile_list
 	map_size = size
 	cafe_spots = plazas
 	
-	var tile_list_of_cars_and_ramps = random_tile(number_of_parked_cars + number_of_ramps)
-	var tile_list_of_billboards = random_tile(number_of_billboards)
-	var tile_list_of_traffic_cones = random_tile(number_of_traffic_cones)
-	var tile_list_of_hydrants_and_lights = random_tile(number_of_hydrants + number_of_street_lights)
-	var tile_list_of_scaffolding = random_tile(number_of_scaffolding)
+	var tile_list_of_Beacons = random_tile(Config.Props[Config.Beacons].number_of)
+	var tile_list_of_Scaffoldings = random_tile(Config.Props[Config.Scaffoldings].number_of)
+	var tile_list_of_Billboards = random_tile(Config.Props[Config.Billboards].number_of)
+	var tile_list_of_TrafficCones = random_tile(Config.Props[Config.TrafficCones].number_of)
+	var tile_list_of_Cafes = random_tile(Config.Props[Config.Cafes].number_of)
+	var tile_list_of_Cars_and_Ramps = random_tile(Config.Props[Config.ParkedCars].number_of + Config.Props[Config.Dumpsters].number_of)
+	var tile_list_of_Hydrants_and_Lights = random_tile(Config.Props[Config.Hydrants].number_of + Config.Props[Config.StreeLights].number_of)
 	
-	place_props(scene_Scaffolding, number_of_scaffolding, tile_list_of_scaffolding)
-	place_props(scene_ParkedCars, number_of_parked_cars, tile_list_of_cars_and_ramps)
-	place_props(scene_Dumpsters, number_of_ramps, tile_list_of_cars_and_ramps)
-	place_props(scene_Billboards, number_of_billboards, tile_list_of_billboards)
-	place_props(scene_TrafficCones, number_of_traffic_cones, tile_list_of_traffic_cones)
-	place_props(scene_StreeLights, number_of_street_lights, tile_list_of_hydrants_and_lights)
-	place_props(scene_Hydrants, number_of_hydrants, tile_list_of_hydrants_and_lights)
+	Config.Props[Config.Beacons].tiles_list = tile_list_of_Beacons
+	Config.Props[Config.Scaffoldings].tiles_list = tile_list_of_Scaffoldings
+	Config.Props[Config.ParkedCars].tiles_list = tile_list_of_Cars_and_Ramps
+	Config.Props[Config.Dumpsters].tiles_list = tile_list_of_Cars_and_Ramps
+	Config.Props[Config.Billboards].tiles_list = tile_list_of_Billboards
+	Config.Props[Config.TrafficCones].tiles_list = tile_list_of_TrafficCones
+	Config.Props[Config.StreeLights].tiles_list = tile_list_of_Hydrants_and_Lights
+	Config.Props[Config.Hydrants].tiles_list = tile_list_of_Hydrants_and_Lights
+	Config.Props[Config.Cafes].tiles_list = tile_list_of_Cafes
+	
+	place_props(Config.Beacons)
+	place_props(Config.Scaffoldings)
+	place_props(Config.ParkedCars)
+	place_props(Config.Dumpsters)
+	place_props(Config.Billboards)
+	place_props(Config.TrafficCones)
+	place_props(Config.StreeLights)
+	place_props(Config.Hydrants)
 	place_cafes()
 	
 func random_tile(tile_count) -> Array[Vector3] :
@@ -54,20 +49,20 @@ func random_tile(tile_count) -> Array[Vector3] :
 		selected_tiles.append(tile)
 	return selected_tiles
 	
-func place_props(scene:Resource, number_of_props:int, tiles_list):
-	for i in range(min(number_of_props, tiles_list.size())):
-		var tile = tiles_list[0]
+func place_props(PropType):
+	for i in range(min(Config.Props[PropType].number_of, Config.Props[PropType].tiles_list.size())):
+		var tile = Config.Props[PropType].tiles_list[0]
 		var tile_type = get_parent().get_cell_item(tile)
 		var allowed_rotations = $ObjectRotationLookup.lookup_rotation(tile_type)
 		if not allowed_rotations == null:
 			var tile_rotation = allowed_rotations[randi() % allowed_rotations.size()] * -1
 			tile.y += .19
-			rpc("spawn_prop", scene, tile, tile_rotation)
-		tiles_list.pop_front()
+			rpc("spawn_prop", PropType, tile, tile_rotation)
+		Config.Props[PropType].tiles_list.pop_front()
 		
 func place_cafes():
 	cafe_spots.shuffle()
-	for i in range(min(number_of_cafes, cafe_spots.size())):
+	for i in range(min(Config.Props[Config.Cafes].number_of, cafe_spots.size())):
 		var cafe = cafe_spots[i]
 		var building_rotation = cafe[0]
 		var cafe_position = Vector3(cafe[1], 0, cafe[2])
@@ -78,11 +73,11 @@ func place_cafes():
 			cafe_rotation = 90
 		elif building_rotation == 22:
 			cafe_rotation = 270
-		rpc("spawn_prop", scene_Cafes, cafe_position, cafe_rotation)
+		rpc("spawn_prop", Config.Cafes, cafe_position, cafe_rotation)
 		
 @rpc("any_peer", "call_local")
-func spawn_prop(scene:Resource, tile, prop_rotation):
-	var prop = scene.instantiate()			
+func spawn_prop(PropsType, tile, prop_rotation):
+	var prop = Config.Props[PropsType].scene.instantiate()			
 	prop.position = Vector3((tile.x * tile_size) + tile_size / 2.0, tile.y, (tile.z * tile_size) + tile_size / 2.0)
 	prop.rotation_degrees.y = prop_rotation
 	add_child(prop, true)

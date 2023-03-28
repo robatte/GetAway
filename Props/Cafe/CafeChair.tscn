@@ -60,6 +60,7 @@ points = PackedVector3Array(-0.270069, 0.584921, -0.270069, -0.270069, 0.584921,
 
 [node name="CafeChair" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.629329, 0)
+collision_mask = 7
 continuous_cd = true
 max_contacts_reported = 1
 contact_monitor = true
