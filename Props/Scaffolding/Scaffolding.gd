@@ -1,6 +1,8 @@
+@tool
 extends Node3D
 
 var has_finished_spawning = false
+var is_physics_active = false
 
 func _on_timer_timeout():
 	await Helper.fade_out(self)

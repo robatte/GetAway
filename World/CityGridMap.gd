@@ -21,6 +21,7 @@ var cell_walls = {
 var plaza_tiles = [20, 22]
 
 func _ready():
+	print("Seed: #" + str(Seed))
 	if Seed != 0:
 		seed(Seed)
 	clear()

@@ -47,7 +47,7 @@ func _connected_to_server(_id):
 	add_to_player_list()
 	rpc("_send_player_info", local_player_id, player_data, is_cop)
 	
-@rpc("any_peer")
+@rpc("any_peer", "reliable")
 func _send_player_info(id, player_info, cop_mode):
 	players[id] = player_info
 	players[id]["is_cop"] = cop_mode
@@ -55,7 +55,7 @@ func _send_player_info(id, player_info, cop_mode):
 		rpc("_update_players", players)
 		rpc("update_waiting_room")
 
-@rpc
+@rpc("reliable")
 func _update_players(player_info):
 	players = player_info
 
@@ -66,14 +66,14 @@ func _on_player_disconnected(id):
 	if not id == 1:
 		dlog("has disconnected.")
 		
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func update_waiting_room():
 	get_tree().call_group("WaitingRoom", "refresh_players", players)
 	
 func start_game():
 	rpc("load_world")
 	
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func load_world():
 	get_tree().change_scene_to_file("res://World/world.tscn")
 		

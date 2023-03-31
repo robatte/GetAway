@@ -1,106 +1,106 @@
-[gd_scene load_steps=6 format=3 uid="uid://ji264s8wgfy2"]
+[gd_scene load_steps=6 format=3 uid="uid://ymmm6tngvyr5"]
 
-[ext_resource type="Script" path="res://Props/Scaffolding/Scaffolding.gd" id="1_s4h6q"]
-[ext_resource type="PackedScene" uid="uid://bcece33jsutym" path="res://Props/Scaffolding/ScaffoldPole.tscn" id="1_vcko8"]
-[ext_resource type="PackedScene" uid="uid://cd2b5ugcgwr2s" path="res://Props/Scaffolding/ScaffoldBoard.tscn" id="3_40ahs"]
-[ext_resource type="PackedScene" uid="uid://cvkstklgronhh" path="res://Props/Scaffolding/ScaffoldSupport.tscn" id="4_xq3mm"]
-[ext_resource type="PackedScene" uid="uid://dpk1yy6itrp7l" path="res://Props/Scaffolding/ScaffoldBar.tscn" id="5_ukd7b"]
+[ext_resource type="Script" path="res://Props/Scaffolding/Scaffolding.gd" id="1_ojkym"]
+[ext_resource type="PackedScene" uid="uid://bcece33jsutym" path="res://Props/Scaffolding/ScaffoldPole.tscn" id="2_vdin4"]
+[ext_resource type="PackedScene" uid="uid://cd2b5ugcgwr2s" path="res://Props/Scaffolding/ScaffoldBoard.tscn" id="3_tccrs"]
+[ext_resource type="PackedScene" uid="uid://cvkstklgronhh" path="res://Props/Scaffolding/ScaffoldSupport.tscn" id="4_ksink"]
+[ext_resource type="PackedScene" uid="uid://dpk1yy6itrp7l" path="res://Props/Scaffolding/ScaffoldBar.tscn" id="5_na5mp"]
 
-[node name="Scaffolding" type="Node3D" groups=["prop"]]
-script = ExtResource("1_s4h6q")
+[node name="Scaffolding" type="Node3D"]
+script = ExtResource("1_ojkym")
 
-[node name="ScaffoldPole" parent="." instance=ExtResource("1_vcko8")]
+[node name="ScaffoldPole" parent="." instance=ExtResource("2_vdin4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -9.868)
 
-[node name="ScaffoldPole2" parent="." instance=ExtResource("1_vcko8")]
+[node name="ScaffoldPole2" parent="." instance=ExtResource("2_vdin4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -8.26797)
 
-[node name="ScaffoldPole3" parent="." instance=ExtResource("1_vcko8")]
+[node name="ScaffoldPole3" parent="." instance=ExtResource("2_vdin4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.868)
 
-[node name="ScaffoldPole4" parent="." instance=ExtResource("1_vcko8")]
+[node name="ScaffoldPole4" parent="." instance=ExtResource("2_vdin4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.26797)
 
-[node name="ScaffoldPole5" parent="." instance=ExtResource("1_vcko8")]
+[node name="ScaffoldPole5" parent="." instance=ExtResource("2_vdin4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -9.868)
 
-[node name="ScaffoldPole6" parent="." instance=ExtResource("1_vcko8")]
+[node name="ScaffoldPole6" parent="." instance=ExtResource("2_vdin4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8.26797)
-
-[node name="ScaffoldBoard" parent="." instance=ExtResource("3_40ahs")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 5, -9.085)
-
-[node name="ScaffoldBoard2" parent="." instance=ExtResource("3_40ahs")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 8, -9.085)
-
-[node name="ScaffoldBoard3" parent="." instance=ExtResource("3_40ahs")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 11, -9.085)
-
-[node name="ScaffoldBoard4" parent="." instance=ExtResource("3_40ahs")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 14, -9.085)
-
-[node name="ScaffoldBoard5" parent="." instance=ExtResource("3_40ahs")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 17, -9.085)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
 
-[node name="ScaffoldSupports" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldBoard" parent="." instance=ExtResource("3_tccrs")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 5, -9.085)
+
+[node name="ScaffoldBoard2" parent="." instance=ExtResource("3_tccrs")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 8, -9.085)
+
+[node name="ScaffoldBoard3" parent="." instance=ExtResource("3_tccrs")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 11, -9.085)
+
+[node name="ScaffoldBoard4" parent="." instance=ExtResource("3_tccrs")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 14, -9.085)
+
+[node name="ScaffoldBoard5" parent="." instance=ExtResource("3_tccrs")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 17, -9.085)
+
+[node name="ScaffoldSupports" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 5, -9.085)
 
-[node name="ScaffoldSupports2" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports2" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -9.085)
 
-[node name="ScaffoldSupports3" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports3" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, -9.085)
 
-[node name="ScaffoldSupports4" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports4" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, -9.085)
 
-[node name="ScaffoldSupports5" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports5" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -9.085)
 
-[node name="ScaffoldSupports6" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports6" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, -9.085)
 
-[node name="ScaffoldSupports7" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports7" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 11, -9.085)
 
-[node name="ScaffoldSupports8" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports8" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -9.085)
 
-[node name="ScaffoldSupports9" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports9" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 11, -9.085)
 
-[node name="ScaffoldSupports10" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports10" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 14, -9.085)
 
-[node name="ScaffoldSupports11" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports11" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, -9.085)
 
-[node name="ScaffoldSupports12" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports12" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 14, -9.085)
 
-[node name="ScaffoldSupports13" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports13" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 17, -9.085)
 
-[node name="ScaffoldSupports14" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports14" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, -9.085)
 
-[node name="ScaffoldSupports15" parent="." instance=ExtResource("4_xq3mm")]
+[node name="ScaffoldSupports15" parent="." instance=ExtResource("4_ksink")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 17, -9.085)
 
-[node name="ScaffoldBar" parent="." instance=ExtResource("5_ukd7b")]
+[node name="ScaffoldBar" parent="." instance=ExtResource("5_na5mp")]
 transform = Transform3D(0.250853, 0.968025, 0, -0.968025, 0.250853, 0, 0, 0, 1, 0, 6.52141, -8.12693)
 
-[node name="ScaffoldBar2" parent="." instance=ExtResource("5_ukd7b")]
+[node name="ScaffoldBar2" parent="." instance=ExtResource("5_na5mp")]
 transform = Transform3D(-0.221072, 0.975258, 0, -0.975258, -0.221072, 0, 0, 0, 1, 0, 9.52141, -8.12693)
 
-[node name="ScaffoldBar3" parent="." instance=ExtResource("5_ukd7b")]
+[node name="ScaffoldBar3" parent="." instance=ExtResource("5_na5mp")]
 transform = Transform3D(0.250853, 0.968025, 0, -0.968025, 0.250853, 0, 0, 0, 1, 0, 12.5214, -8.12693)
 
-[node name="ScaffoldBar4" parent="." instance=ExtResource("5_ukd7b")]
+[node name="ScaffoldBar4" parent="." instance=ExtResource("5_na5mp")]
 transform = Transform3D(-0.221072, 0.975258, 0, -0.975258, -0.221072, 0, 0, 0, 1, 0, 15.5214, -8.12693)
 
 [connection signal="body_entered" from="ScaffoldPole" to="." method="_on_scaffold_pole_body_entered"]

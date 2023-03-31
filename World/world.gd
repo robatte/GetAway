@@ -1,5 +1,8 @@
 extends Node3D
 
+func _ready() -> void:
+	print("World is ready")
+
 func _enter_tree():
 	get_tree().paused = true
 	print("World...")
