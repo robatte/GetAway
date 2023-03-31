@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://pluqwdevbrgw"]
+
+[ext_resource type="PackedScene" uid="uid://djfe7f6k2xek8" path="res://Beacon/Beacon.tscn" id="1_vkdec"]
+[ext_resource type="Script" path="res://Beacon/Goal.gd" id="2_3lq11"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fsplt"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.168627, 0.239216, 0.847059, 0.509804)
+
+[node name="Goal" instance=ExtResource("1_vkdec")]
+script = ExtResource("2_3lq11")
+
+[node name="CSGCylinder3D" parent="." index="0"]
+material = SubResource("StandardMaterial3D_fsplt")

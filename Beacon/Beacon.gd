@@ -1,14 +1,18 @@
 extends Area3D
 
+## The actual radius*2 of the beacon.
 var size
+
+## The current player acting with the beacon
 var player
+
+## Waiting time that has to pass while acting with an player to trigger an action
 var wait
 
 func _ready() -> void:
 	wait = $Timer.wait_time
 	if Network.is_cop:
 		hide()
-
 
 func _physics_process(_delta: float) -> void:
 	if not $Timer.is_stopped():
@@ -23,10 +27,12 @@ func _on_body_entered(body: Node3D) -> void:
 	player = body
 	$Timer.start()
 	show()
+	get_tree().call_group("Announcements", "announce_crime", position)
 
 func _on_body_exited(_body: Node3D) -> void:
 	$Timer.stop()
 	player = null
 
 func _on_timer_timeout() -> void:
+	player.beacon_emptied()
 	queue_free()

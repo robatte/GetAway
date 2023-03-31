@@ -17,7 +17,6 @@ radius = 0.125
 [node name="ScaffoldBar" type="RigidBody3D"]
 collision_mask = 7
 gravity_scale = 0.0
-continuous_cd = true
 sleeping = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

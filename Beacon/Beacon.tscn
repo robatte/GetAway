@@ -5,7 +5,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rr644"]
 transparency = 1
 shading_mode = 0
-albedo_color = Color(0.592157, 0.596078, 0.12549, 0.392157)
+albedo_color = Color(0.529412, 0.596078, 0.12549, 0.392157)
 disable_receive_shadows = true
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_te62e"]

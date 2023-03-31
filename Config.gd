@@ -2,12 +2,17 @@
 extends Node
 
 
-enum {Beacons, Scaffoldings, ParkedCars, Dumpsters, Billboards, TrafficCones, StreeLights, Hydrants, Cafes}
+enum {Beacons, Goal, Scaffoldings, ParkedCars, Dumpsters, Billboards, TrafficCones, StreeLights, Hydrants, Cafes}
 
 var Props = {
 	Beacons : {
 		"number_of": 20,
 		"scene": preload("res://Beacon/Beacon.tscn"),
+		"tiles_list": []
+	},
+	Goal : {
+		"number_of": 1,
+		"scene": preload("res://Beacon/Goal.tscn"),
 		"tiles_list": []
 	},
 	Scaffoldings : {

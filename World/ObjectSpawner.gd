@@ -12,7 +12,7 @@ func generate_props(tile_list, size:Vector2, plazas):
 	map_size = size
 	cafe_spots = plazas
 	
-	var tile_list_of_Beacons = random_tile(Config.Props[Config.Beacons].number_of)
+	var tile_list_of_Beacons = random_tile(Config.Props[Config.Beacons].number_of + Config.Props[Config.Goal].number_of)
 	var tile_list_of_Scaffoldings = random_tile(Config.Props[Config.Scaffoldings].number_of)
 	var tile_list_of_Billboards = random_tile(Config.Props[Config.Billboards].number_of)
 	var tile_list_of_TrafficCones = random_tile(Config.Props[Config.TrafficCones].number_of)
@@ -20,6 +20,7 @@ func generate_props(tile_list, size:Vector2, plazas):
 	var tile_list_of_Cars_and_Ramps = random_tile(Config.Props[Config.ParkedCars].number_of + Config.Props[Config.Dumpsters].number_of)
 	var tile_list_of_Hydrants_and_Lights = random_tile(Config.Props[Config.Hydrants].number_of + Config.Props[Config.StreeLights].number_of)
 	
+	Config.Props[Config.Goal].tiles_list = tile_list_of_Beacons
 	Config.Props[Config.Beacons].tiles_list = tile_list_of_Beacons
 	Config.Props[Config.Scaffoldings].tiles_list = tile_list_of_Scaffoldings
 	Config.Props[Config.ParkedCars].tiles_list = tile_list_of_Cars_and_Ramps
@@ -31,6 +32,7 @@ func generate_props(tile_list, size:Vector2, plazas):
 	Config.Props[Config.Cafes].tiles_list = tile_list_of_Cafes
 	
 	place_props(Config.Beacons)
+	place_props(Config.Goal)
 	place_props(Config.Scaffoldings)
 	place_props(Config.ParkedCars)
 	place_props(Config.Dumpsters)
@@ -81,4 +83,4 @@ func spawn_prop(PropsType, tile, prop_rotation):
 	prop.position = Vector3((tile.x * tile_size) + tile_size / 2.0, tile.y, (tile.z * tile_size) + tile_size / 2.0)
 	prop.rotation_degrees.y = prop_rotation
 	add_child(prop, true)
-	
+
