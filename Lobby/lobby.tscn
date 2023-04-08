@@ -1,115 +1,132 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhmlpponf2pxn"]
+[gd_scene load_steps=7 format=3 uid="uid://bhmlpponf2pxn"]
 
 [ext_resource type="Theme" uid="uid://buv5pymjub15j" path="res://Lobby/Lobby.tres" id="1_v7uyf"]
 [ext_resource type="PackedScene" uid="uid://qs2a81rid3bj" path="res://Lobby/WaitingRoom.tscn" id="2_3c4uh"]
 [ext_resource type="Script" path="res://Lobby/Lobby.gd" id="2_r2oh1"]
+[ext_resource type="PackedScene" uid="uid://bnnndyw5j4esg" path="res://Lobby/LobbyBackground.tscn" id="3_hwlxt"]
+[ext_resource type="Texture2D" uid="uid://bo87lsnc1ueh5" path="res://Gui/criminal.svg" id="4_obx8a"]
+[ext_resource type="Texture2D" uid="uid://dewb0ukjgi13r" path="res://Gui/cop.svg" id="5_ylv3g"]
 
-[node name="Lobby" type="Control"]
-layout_mode = 3
+[node name="Lobby" type="CanvasLayer"]
+script = ExtResource("2_r2oh1")
+
+[node name="LobbyBackground" parent="." instance=ExtResource("3_hwlxt")]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_v7uyf")
-script = ExtResource("2_r2oh1")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0431373, 0, 0, 1)
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_top = 16
+theme_override_constants/margin_top = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 40
 text = "Lobby"
 horizontal_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/CenterContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 8
 columns = 2
 
-[node name="NameLabel" type="Label" parent="MarginContainer/CenterContainer/GridContainer"]
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 text = "Name"
 horizontal_alignment = 2
 
-[node name="NameTextbox" type="LineEdit" parent="MarginContainer/CenterContainer/GridContainer"]
-custom_minimum_size = Vector2(320, 0)
+[node name="NameTextbox" type="LineEdit" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 text = "Robs"
 alignment = 1
+caret_blink = true
+caret_blink_interval = 0.5
 
-[node name="IPLabel" type="Label" parent="MarginContainer/CenterContainer/GridContainer"]
+[node name="IPLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 text = "IP"
 horizontal_alignment = 2
 
-[node name="IPTextbox" type="LineEdit" parent="MarginContainer/CenterContainer/GridContainer"]
-custom_minimum_size = Vector2(320, 0)
+[node name="IPTextbox" type="LineEdit" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 text = "127.0.0.1"
 alignment = 1
+caret_blink = true
+caret_blink_interval = 0.5
 
-[node name="PortLabel" type="Label" parent="MarginContainer/CenterContainer/GridContainer"]
+[node name="PortLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 text = "Port"
 horizontal_alignment = 2
 
-[node name="PortTextbox" type="LineEdit" parent="MarginContainer/CenterContainer/GridContainer"]
-custom_minimum_size = Vector2(320, 0)
+[node name="PortTextbox" type="LineEdit" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 text = "32023"
 alignment = 1
+caret_blink = true
+caret_blink_interval = 0.5
 
-[node name="HostButton" type="Button" parent="MarginContainer/CenterContainer/GridContainer"]
-layout_mode = 2
-text = " Host Game "
-
-[node name="JoinButton" type="Button" parent="MarginContainer/CenterContainer/GridContainer"]
-layout_mode = 2
-text = "Join
-"
-
-[node name="TeamLabel" type="Label" parent="MarginContainer/CenterContainer/GridContainer"]
+[node name="TeamLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 text = "Team"
 horizontal_alignment = 2
 
-[node name="TeamCheck" type="CheckButton" parent="MarginContainer/CenterContainer/GridContainer"]
+[node name="TeamCheck" type="ItemList" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
-text = "Cop Mode  
+auto_height = true
+item_count = 2
+max_columns = 2
+same_column_width = true
+fixed_column_width = 120
+icon_mode = 0
+fixed_icon_size = Vector2i(64, 64)
+item_0/text = ""
+item_0/icon = ExtResource("4_obx8a")
+item_1/text = ""
+item_1/icon = ExtResource("5_ylv3g")
+
+[node name="ColorLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "Car Colour"
+horizontal_alignment = 2
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+edit_alpha = false
+
+[node name="HostButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+text = " Host Game "
+
+[node name="JoinButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "Join
 "
-alignment = 2
 
 [node name="WaitingRoom" parent="." groups=["WaitingRoom"] instance=ExtResource("2_3c4uh")]
 visible = false
-layout_mode = 1
 
-[connection signal="text_changed" from="MarginContainer/CenterContainer/GridContainer/NameTextbox" to="." method="_on_name_textbox_text_changed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/GridContainer/HostButton" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/GridContainer/JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="toggled" from="MarginContainer/CenterContainer/GridContainer/TeamCheck" to="." method="_on_team_check_toggled"]
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/NameTextbox" to="." method="_on_name_textbox_text_changed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/TeamCheck" to="." method="_on_team_check_item_selected"]
+[connection signal="color_changed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="WaitingRoom/MarginContainer/VBoxContainer/ReadyButton" to="." method="_on_ready_button_pressed"]
 
+[editable path="LobbyBackground"]
 [editable path="WaitingRoom"]

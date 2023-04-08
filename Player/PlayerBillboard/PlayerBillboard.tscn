@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://qmucetjyw867"]
+
+[ext_resource type="FontFile" uid="uid://cv4un0jhof24h" path="res://Fonts/FashionVictim.ttf" id="1_gpjxe"]
+[ext_resource type="Texture2D" uid="uid://dewb0ukjgi13r" path="res://Gui/cop.svg" id="2_ryqbq"]
+[ext_resource type="Script" path="res://Player/PlayerBillboard/PlayerBillboardMesh.gd" id="3_kwtrk"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ltitb"]
+resource_local_to_scene = true
+
+[node name="PlayerBillboard" type="Node3D"]
+
+[node name="PlayerLabel3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.08488, 0)
+billboard = 2
+text = "Oha
+"
+font = ExtResource("1_gpjxe")
+font_size = 200
+outline_size = 4
+autowrap_mode = 2
+width = 200.0
+
+[node name="PlayerBillboardSubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+use_taa = true
+canvas_item_default_texture_filter = 2
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PlayerBillboardSubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = -36.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+fill_mode = 4
+texture_progress = ExtResource("2_ryqbq")
+tint_progress = Color(0.396078, 0.529412, 0.980392, 1)
+
+[node name="PlayerBillboardMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00638, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_ltitb")
+script = ExtResource("3_kwtrk")

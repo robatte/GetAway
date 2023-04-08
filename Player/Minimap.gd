@@ -1,6 +1,6 @@
 extends Camera3D
 
-@onready var car = get_owner()
+@onready var car = get_owner().get_parent()
 
 const minimum_height = 50
 var speed = 0

@@ -1,8 +1,8 @@
-extends Control
+extends CanvasLayer
 
-@onready var NameTextBox = $MarginContainer/CenterContainer/GridContainer/NameTextbox
-@onready var SelectedPort = $MarginContainer/CenterContainer/GridContainer/PortTextbox
-@onready var SelectedIP = $MarginContainer/CenterContainer/GridContainer/IPTextbox 
+@onready var NameTextBox = $MarginContainer/VBoxContainer/CenterContainer/GridContainer/NameTextbox
+@onready var SelectedPort = $MarginContainer/VBoxContainer/CenterContainer/GridContainer/PortTextbox
+@onready var SelectedIP = $MarginContainer/VBoxContainer/CenterContainer/GridContainer/IPTextbox
 
 var isCop = false
 
@@ -38,6 +38,33 @@ func create_waiting_room():
 func _on_ready_button_pressed():
 	Network.start_game()
 
+func _on_team_check_item_selected(index: int) -> void:
+	if not int(isCop) == index:
+		var button = $MarginContainer/VBoxContainer/CenterContainer/GridContainer/TeamCheck
+		button.set_item_disabled(0, true)
+		button.set_item_disabled(1, true)
+		isCop = index
+		if isCop:
+			$LobbyBackground/Pivot/Cop1/Siren/SirenMesh/SpotLight3DRed.show()
+			$LobbyBackground/Pivot/Cop1/Siren/SirenMesh/SpotLight3DBlue.show()
+			$LobbyBackground/Pivot/Cop1/Siren/AnimationPlayer.play("Siren")
+			$LobbyBackground/Pivot/Cop2/Siren/SirenMesh/SpotLight3DRed.show()
+			$LobbyBackground/Pivot/Cop2/Siren/SirenMesh/SpotLight3DBlue.show()
+			$LobbyBackground/Pivot/Cop2/Siren/AnimationPlayer.play("Siren")
+		else:
+			$LobbyBackground/Pivot/Cop1/Siren/SirenMesh/SpotLight3DRed.hide()
+			$LobbyBackground/Pivot/Cop1/Siren/SirenMesh/SpotLight3DBlue.hide()
+			$LobbyBackground/Pivot/Cop1/Siren/AnimationPlayer.stop()
+			$LobbyBackground/Pivot/Cop2/Siren/SirenMesh/SpotLight3DRed.hide()
+			$LobbyBackground/Pivot/Cop2/Siren/SirenMesh/SpotLight3DBlue.hide()
+			$LobbyBackground/Pivot/Cop2/Siren/AnimationPlayer.stop()
+			
+		await $LobbyBackground.pivot()
+		button.set_item_disabled(0, false)
+		button.set_item_disabled(1, false)
+		
+		
 
-func _on_team_check_toggled(button_pressed):
-	isCop = button_pressed
+
+func _on_color_picker_button_color_changed(color: Color) -> void:
+	$LobbyBackground.new_color(color)

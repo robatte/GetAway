@@ -1,6 +1,8 @@
 @tool
 extends Node
 
+var escape = PackedByteArray([0x1b]).get_string_from_ascii()
+
 func fade_out(node, time = 3):
 	var TW = create_tween().set_parallel()
 	for obj in node.find_children("", "GeometryInstance3D"):
@@ -19,3 +21,11 @@ func deactivate_collision(node:Node3D):
 	for child in prop_nodes:
 		child.sleeping = true
 		child.gravity_scale = 0.0
+
+func Log(caller:String, msg:String):
+	print_rich("[color=green][" + caller + ":" + str(Network.local_player_id) +"]:[/color]" + msg)
+
+func LogA(caller:String, msgA:Array):
+	print_rich("[color=green][" + caller + ":" + str(Network.local_player_id) +"]:[/color]")
+	for n in msgA:
+		print_rich("[indent] - " + str(n) + "[/indent]")

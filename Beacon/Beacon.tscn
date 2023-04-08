@@ -15,6 +15,7 @@ radius = 2.5
 [node name="Beacon" type="Area3D"]
 collision_layer = 0
 collision_mask = 2
+monitorable = false
 script = ExtResource("1_a3isp")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]

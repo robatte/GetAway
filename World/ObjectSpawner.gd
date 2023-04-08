@@ -7,6 +7,8 @@ var map_size = Vector2()
 
 const tile_size = 20
 
+signal cop_spawn
+
 func generate_props(tile_list, size:Vector2, plazas):
 	tiles = tile_list
 	map_size = size
@@ -32,7 +34,7 @@ func generate_props(tile_list, size:Vector2, plazas):
 	Config.Props[Config.Cafes].tiles_list = tile_list_of_Cafes
 	
 	place_props(Config.Beacons)
-	place_props(Config.Goal)
+	place_props(Config.Goal, cop_spawn)
 	place_props(Config.Scaffoldings)
 	place_props(Config.ParkedCars)
 	place_props(Config.Dumpsters)
@@ -51,7 +53,7 @@ func random_tile(tile_count) -> Array[Vector3] :
 		selected_tiles.append(tile)
 	return selected_tiles
 	
-func place_props(PropType):
+func place_props(PropType, position_signal = null):
 	for i in range(min(Config.Props[PropType].number_of, Config.Props[PropType].tiles_list.size())):
 		var tile = Config.Props[PropType].tiles_list[0]
 		var tile_type = get_parent().get_cell_item(tile)
@@ -59,7 +61,7 @@ func place_props(PropType):
 		if not allowed_rotations == null:
 			var tile_rotation = allowed_rotations[randi() % allowed_rotations.size()] * -1
 			tile.y += .19
-			rpc("spawn_prop", PropType, tile, tile_rotation)
+			rpc("spawn_prop", PropType, tile, tile_rotation, position_signal)
 		Config.Props[PropType].tiles_list.pop_front()
 		
 func place_cafes():
@@ -78,9 +80,12 @@ func place_cafes():
 		rpc("spawn_prop", Config.Cafes, cafe_position, cafe_rotation)
 		
 @rpc("any_peer", "call_local")
-func spawn_prop(PropsType, tile, prop_rotation):
+func spawn_prop(PropsType, tile, prop_rotation, position_signal = null):
 	var prop = Config.Props[PropsType].scene.instantiate()			
 	prop.position = Vector3((tile.x * tile_size) + tile_size / 2.0, tile.y, (tile.z * tile_size) + tile_size / 2.0)
 	prop.rotation_degrees.y = prop_rotation
 	add_child(prop, true)
+	if position_signal:
+		position_signal.emit(prop.position)
+		
 

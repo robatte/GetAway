@@ -16,11 +16,6 @@ var is_cop = false
 signal player_disconnected
 signal server_disconnected
 
-func dlog(text: String):
-	var isServerStr = ""
-	if multiplayer.is_server(): 
-		isServerStr = "!"
-	print("#" + str(local_player_id) + isServerStr + ": " + text)
 
 func _ready():
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
@@ -33,6 +28,7 @@ func create_server():
 	add_to_player_list()
 
 func connect_to_server():
+	Helper.Log("Player", "connects to server")
 	peer.create_client(selected_ip, selected_port)
 	multiplayer.multiplayer_peer = peer
 
@@ -45,6 +41,7 @@ func add_to_player_list():
 
 func _connected_to_server(_id):
 	add_to_player_list()
+	Helper.Log("Player", "has connected")
 	rpc("_send_player_info", local_player_id, player_data, is_cop)
 	
 @rpc("any_peer", "reliable")
@@ -60,11 +57,9 @@ func _update_players(player_info):
 	players = player_info
 
 func _on_player_connected(_id):
-	dlog("has connected")
-
-func _on_player_disconnected(id):
-	if not id == 1:
-		dlog("has disconnected.")
+	pass
+func _on_player_disconnected(_id):
+	pass
 		
 @rpc("any_peer", "call_local", "reliable")
 func update_waiting_room():
@@ -75,5 +70,6 @@ func start_game():
 	
 @rpc("any_peer", "call_local", "reliable")
 func load_world():
+	Helper.Log("World", "load world")
 	get_tree().change_scene_to_file("res://World/world.tscn")
 		

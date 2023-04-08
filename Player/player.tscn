@@ -1,56 +1,81 @@
-[gd_scene load_steps=16 format=3 uid="uid://c5o0kpwn4ev2r"]
+[gd_scene load_steps=20 format=3 uid="uid://dlonyhjuam3uy"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_dqm6k"]
 [ext_resource type="ArrayMesh" uid="uid://b45oru3tx1hip" path="res://Player/Meshes/RobberCar.mesh" id="2_dmaj2"]
 [ext_resource type="ArrayMesh" uid="uid://be5adprxvcfl" path="res://Player/Meshes/PoliceCar.mesh" id="3_fqns6"]
 [ext_resource type="ArrayMesh" uid="uid://brv4b37ifgbfb" path="res://Player/Meshes/Tire.mesh" id="3_gaa44"]
-[ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="4_eoxq5"]
-[ext_resource type="Script" path="res://Player/Minimap.gd" id="6_hucmv"]
-[ext_resource type="Texture2D" uid="uid://xsldysy1lwih" path="res://Gui/MapFrame.svg" id="6_jpyo1"]
-[ext_resource type="Theme" uid="uid://buv5pymjub15j" path="res://Lobby/Lobby.tres" id="6_luqar"]
-[ext_resource type="StyleBox" uid="uid://bo24lcik86rxc" path="res://Gui/Frame.tres" id="8_bmg1j"]
-[ext_resource type="PackedScene" uid="uid://bikpqmi0lr76x" path="res://Gui/Announcer.tscn" id="10_k2i5q"]
+[ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="10_12i5b"]
+[ext_resource type="PackedScene" uid="uid://depddspqh081" path="res://Gui/Gui.tscn" id="10_ask5d"]
 [ext_resource type="PackedScene" uid="uid://dn8xgt3cyoho2" path="res://Player/Arrow/Arrow.tscn" id="11_a1bxi"]
+[ext_resource type="AudioStream" uid="uid://dms44k7vnemrf" path="res://SFX/siren.ogg" id="13_jche4"]
+[ext_resource type="AudioStream" uid="uid://ccenif7waj6ea" path="res://SFX/horn.ogg" id="13_r5aqf"]
+[ext_resource type="PackedScene" uid="uid://qmucetjyw867" path="res://Player/PlayerBillboard/PlayerBillboard.tscn" id="14_2pv7i"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vgxy8"]
 points = PackedVector3Array(0.627165, 1.4824, -1.39729, 1.01683, -0.117202, -1.84489, -0.881354, 0.0460728, 2.01177, -0.524346, 1.4707, 0.14623, -0.917121, -0.117202, -1.98336, 0.326033, -0.186337, 1.19332, -0.666214, 1.48855, -1.27838, -0.986337, 0.642781, 1.67711, 0.671332, 0.918816, 1.88395, 0.8932, 0.0591935, 1.97035, 0.508923, 1.43403, -1.75718, -0.157307, 0.987782, 1.95319, 0.94761, 0.366408, -2.05216, 0.532424, 1.43774, 0.140977, 1.01683, 0.573646, 1.40059, -0.917121, 0.366408, -2.05216, -0.986337, -0.117202, 0.571914, -0.488213, 1.44902, -1.79238, 0.326033, 0.366408, -2.19064, 1.01683, -0.117202, 0.571914, 0.247197, 0.0465166, 2.14385, 0.690981, 1.48174, -1.20296, -0.640843, 0.918816, 1.88395, -0.364564, -0.186337, 1.19332, -0.709863, 0.228137, 2.1609, 0.94761, 0.228137, 2.09123, 0.878589, -0.117202, -1.98336, -0.280134, -0.143526, 1.66032, -0.295544, 0.366408, -2.19064, 0.94761, 0.642781, 1.81515, -0.986337, 0.366408, 1.95319, 0.118775, 0.987782, 1.95319)
 
-[sub_resource type="Animation" id="Animation_svjyg"]
-resource_name = "MoneyPulse"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:theme_override_styles/normal:bg_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0.588235), Color(0.490196, 0.345098, 0.0470588, 0.588235), Color(0, 0, 0, 0.588235)]
-}
+[sub_resource type="Gradient" id="Gradient_cpyd3"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.498392)
+colors = PackedColorArray(0.270588, 0.392157, 0.945098, 1, 0.952941, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_qr2sq"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d2xn5"]
+gradient = SubResource("Gradient_cpyd3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8jur0"]
+albedo_texture = SubResource("GradientTexture1D_d2xn5")
+metallic = 0.69
+metallic_specular = 0.27
+roughness = 0.0
+emission = Color(0.992157, 0.988235, 1, 1)
+emission_operator = 1
+backlight = Color(0, 0.858824, 0, 1)
+uv1_offset = Vector3(0.251, 0, 0.613)
+
+[sub_resource type="SphereMesh" id="SphereMesh_vv1ag"]
+material = SubResource("StandardMaterial3D_8jur0")
+radius = 0.125
+height = 0.3
+
+[sub_resource type="Animation" id="Animation_1kcqt"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:theme_override_styles/normal:bg_color")
+tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 0, 0, 0.588235)]
+"values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fo0dk"]
-_data = {
-"MoneyPulse": SubResource("Animation_svjyg"),
-"RESET": SubResource("Animation_qr2sq")
+[sub_resource type="Animation" id="Animation_bhdpp"]
+resource_name = "Siren"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.26573, 0)]
 }
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cjygu"]
+_data = {
+"RESET": SubResource("Animation_1kcqt"),
+"Siren": SubResource("Animation_bhdpp")
+}
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ea8m0"]
+radius = 8.0
 
 [node name="Player" type="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.397382, 0)
@@ -133,112 +158,6 @@ damping_relaxation = 4.0
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 mesh = ExtResource("3_gaa44")
 
-[node name="SmoothCamera" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.89117, 0)
-top_level = true
-cull_mask = 1048571
-doppler_tracking = 2
-current = true
-script = ExtResource("4_eoxq5")
-target_path = NodePath("..")
-offset = Vector3(0, 2, -5)
-
-[node name="Gui" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("6_luqar")
-
-[node name="MarginContainer" type="MarginContainer" parent="Gui"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -260.0
-offset_bottom = 260.0
-grow_horizontal = 0
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-
-[node name="ColorRect" type="ColorRect" parent="Gui/MarginContainer"]
-custom_minimum_size = Vector2(250, 250)
-layout_mode = 2
-color = Color(0, 0, 0, 1)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Gui/MarginContainer/ColorRect"]
-layout_mode = 2
-offset_right = 250.0
-offset_bottom = 250.0
-
-[node name="Minimap" type="SubViewportContainer" parent="Gui/MarginContainer/ColorRect/VBoxContainer"]
-custom_minimum_size = Vector2(250, 250)
-layout_mode = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="Gui/MarginContainer/ColorRect/VBoxContainer/Minimap"]
-transparent_bg = true
-handle_input_locally = false
-use_taa = true
-size = Vector2i(250, 250)
-render_target_update_mode = 4
-
-[node name="Camera3D" type="Camera3D" parent="Gui/MarginContainer/ColorRect/VBoxContainer/Minimap/SubViewport" groups=["Interface"]]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 100, 0)
-current = true
-fov = 70.0
-size = 80.0
-far = 600.0
-script = ExtResource("6_hucmv")
-
-[node name="Location" type="Label" parent="Gui/MarginContainer/ColorRect/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("8_bmg1j")
-horizontal_alignment = 1
-
-[node name="MoneyLabel" type="Label" parent="Gui/MarginContainer/ColorRect/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("8_bmg1j")
-text = "§ 0"
-horizontal_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Gui/MarginContainer/ColorRect/VBoxContainer/MoneyLabel"]
-libraries = {
-"": SubResource("AnimationLibrary_fo0dk")
-}
-
-[node name="MarginContainer" type="MarginContainer" parent="Gui/MarginContainer/ColorRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_top = -3
-
-[node name="TextureRect" type="TextureRect" parent="Gui/MarginContainer/ColorRect/MarginContainer"]
-layout_mode = 2
-texture = ExtResource("6_jpyo1")
-
-[node name="DebugItemList" type="ItemList" parent="Gui"]
-clip_contents = false
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 1
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 210.0
-offset_bottom = 20.0
-auto_height = true
-fixed_column_width = 100
-metadata/_edit_use_anchors_ = true
-
-[node name="Announcer" parent="Gui" instance=ExtResource("10_k2i5q")]
-layout_mode = 1
-
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 30, 0)
 layers = 4
@@ -247,6 +166,98 @@ spot_range = 50.0
 spot_angle = 10.0
 
 [node name="Arrow" parent="." instance=ExtResource("11_a1bxi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.31877, -0.926039)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.31877, -0.219633)
+
+[node name="Siren" type="Node3D" parent="."]
+
+[node name="SirenMesh" type="MeshInstance3D" parent="Siren"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77448, 0)
+mesh = SubResource("SphereMesh_vv1ag")
+
+[node name="SpotLight3DRed" type="SpotLight3D" parent="Siren/SirenMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, -0.25)
+visible = false
+light_color = Color(0.952941, 0, 0, 1)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 50.0
+spot_angle = 30.0
+
+[node name="SpotLight3DRed2" type="SpotLight3D" parent="Siren/SirenMesh/SpotLight3DRed"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+light_color = Color(0.952941, 0, 0, 1)
+light_energy = 5.0
+light_specular = 1.0
+spot_range = 0.3
+spot_angle = 40.0
+
+[node name="SpotLight3DBlue" type="SpotLight3D" parent="Siren/SirenMesh"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.125, 0.25)
+visible = false
+light_color = Color(0.270588, 0.392157, 0.945098, 1)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 50.0
+spot_angle = 30.0
+
+[node name="SpotLight3DBlue2" type="SpotLight3D" parent="Siren/SirenMesh/SpotLight3DBlue"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+light_color = Color(0.270588, 0.392157, 0.945098, 1)
+light_energy = 5.0
+light_specular = 1.0
+spot_range = 0.3
+spot_angle = 40.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Siren"]
+stream = ExtResource("13_jche4")
+volume_db = -18.06
+max_distance = 200.0
+bus = &"SoundEffects"
+doppler_tracking = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Siren"]
+root_node = NodePath("../SirenMesh")
+libraries = {
+"": SubResource("AnimationLibrary_cjygu")
+}
+
+[node name="ArestArea" type="Area3D" parent="Siren"]
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Siren/ArestArea"]
+shape = SubResource("CylinderShape3D_ea8m0")
+
+[node name="AudioStreamPlayer3DHorn" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("13_r5aqf")
+max_distance = 200.0
+bus = &"SoundEffects"
+doppler_tracking = 2
+
+[node name="PlayerBillboard" parent="." instance=ExtResource("14_2pv7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5984, 0)
+
+[node name="Gui" parent="." instance=ExtResource("10_ask5d")]
+
+[node name="Debug" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.887754, -2.18862)
+text = "Player"
+font_size = 24
+autowrap_mode = 3
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(-1, 1.21669e-08, -8.6572e-08, 0, 0.990268, 0.139173, 8.74228e-08, 0.139173, -0.990268, 0, 3, -5)
+top_level = true
+doppler_tracking = 2
+current = true
+script = ExtResource("10_12i5b")
+target_path = NodePath("..")
+offset = Vector3(0, 2.5, -5)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Siren/ArestArea" to="." method="_on_arest_area_body_entered"]
+[connection signal="body_exited" from="Siren/ArestArea" to="." method="_on_arest_area_body_exited"]
+[connection signal="finished" from="AudioStreamPlayer3DHorn" to="." method="_on_audio_stream_player_3d_horn_finished"]

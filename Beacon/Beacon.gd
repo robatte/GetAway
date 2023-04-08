@@ -27,6 +27,7 @@ func _on_body_entered(body: Node3D) -> void:
 	player = body
 	$Timer.start()
 	show()
+	print("Beacon player: " + str(body))
 	get_tree().call_group("Announcements", "announce_crime", position)
 
 func _on_body_exited(_body: Node3D) -> void:
@@ -34,5 +35,7 @@ func _on_body_exited(_body: Node3D) -> void:
 	player = null
 
 func _on_timer_timeout() -> void:
+	Helper.Log("Beacon", str(player) + " finished beacon")
+#	if player.name == str(Network.local_player_id):
 	player.beacon_emptied()
 	queue_free()
