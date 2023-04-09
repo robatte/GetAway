@@ -60,3 +60,7 @@ func check_win_conditions():
 func _on_object_spawner_cop_spawn(location: Vector3) -> void:
 	Helper.Log("World", "Spawn Cop at " + str(location))
 	cop_spawn_point = location
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("menu"):
+		$AudioMenu.show()

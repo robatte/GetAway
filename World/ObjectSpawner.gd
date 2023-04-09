@@ -9,6 +9,20 @@ const tile_size = 20
 
 signal cop_spawn
 
+func _ready():
+	set_multiplier()
+	
+func set_multiplier():
+	Config.Props[Config.Beacons].number_of *= Network.prop_multiplier
+	Config.Props[Config.Scaffoldings].number_of *= Network.prop_multiplier
+	Config.Props[Config.ParkedCars].number_of *= Network.prop_multiplier
+	Config.Props[Config.Dumpsters].number_of *= Network.prop_multiplier
+	Config.Props[Config.Billboards].number_of *= Network.prop_multiplier
+	Config.Props[Config.TrafficCones].number_of *= Network.prop_multiplier
+	Config.Props[Config.StreeLights].number_of *= Network.prop_multiplier
+	Config.Props[Config.Hydrants].number_of *= Network.prop_multiplier
+	Config.Props[Config.Cafes].number_of *= Network.prop_multiplier
+	
 func generate_props(tile_list, size:Vector2, plazas):
 	tiles = tile_list
 	map_size = size
@@ -54,6 +68,7 @@ func random_tile(tile_count) -> Array[Vector3] :
 	return selected_tiles
 	
 func place_props(PropType, position_signal = null):
+	Helper.Log("ObjectSpawner", "spawn " + str(min(Config.Props[PropType].number_of, Config.Props[PropType].tiles_list.size())) + " " + Config.Props[PropType].name)
 	for i in range(min(Config.Props[PropType].number_of, Config.Props[PropType].tiles_list.size())):
 		var tile = Config.Props[PropType].tiles_list[0]
 		var tile_type = get_parent().get_cell_item(tile)

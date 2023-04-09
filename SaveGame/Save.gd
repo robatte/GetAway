@@ -8,7 +8,13 @@ func _ready():
 
 func get_data():
 	if not FileAccess.file_exists(SAVEGAME):
-		save_data = {"Player_name": "Unnamed"}
+		save_data = {
+			"Player_name": "Unnamed",
+			"local_paint_color": "ff6e2626",
+			"master_volume": -10,
+			"music_volume": -10,
+			"sfx_volume": -10
+		}
 		save_game()
 		
 	var file = FileAccess.open(SAVEGAME, FileAccess.READ)	

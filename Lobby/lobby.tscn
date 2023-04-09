@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhmlpponf2pxn"]
+[gd_scene load_steps=8 format=3 uid="uid://bhmlpponf2pxn"]
 
 [ext_resource type="Theme" uid="uid://buv5pymjub15j" path="res://Lobby/Lobby.tres" id="1_v7uyf"]
 [ext_resource type="PackedScene" uid="uid://qs2a81rid3bj" path="res://Lobby/WaitingRoom.tscn" id="2_3c4uh"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bnnndyw5j4esg" path="res://Lobby/LobbyBackground.tscn" id="3_hwlxt"]
 [ext_resource type="Texture2D" uid="uid://bo87lsnc1ueh5" path="res://Gui/criminal.svg" id="4_obx8a"]
 [ext_resource type="Texture2D" uid="uid://dewb0ukjgi13r" path="res://Gui/cop.svg" id="5_ylv3g"]
+[ext_resource type="PackedScene" uid="uid://1ql4460craae" path="res://Gui/AudioMenu.tscn" id="7_bi3ke"]
 
 [node name="Lobby" type="CanvasLayer"]
 script = ExtResource("2_r2oh1")
@@ -19,7 +20,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_v7uyf")
+theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -109,6 +113,36 @@ horizontal_alignment = 2
 layout_mode = 2
 edit_alpha = false
 
+[node name="CitySizeLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "City Size"
+horizontal_alignment = 2
+
+[node name="CitySizeButton" type="OptionButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+alignment = 1
+item_count = 4
+selected = 1
+popup/item_0/text = "Small"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Large"
+popup/item_2/id = 2
+popup/item_3/text = "Huge"
+popup/item_3/id = 3
+
+[node name="CitySeedLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "City Seed"
+horizontal_alignment = 2
+
+[node name="CitySeed" type="LineEdit" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+placeholder_text = "Same seed generates the same city"
+alignment = 1
+clear_button_enabled = true
+
 [node name="HostButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 text = " Host Game "
@@ -118,14 +152,25 @@ layout_mode = 2
 text = "Join
 "
 
+[node name="AudioSettingsButton" type="Button" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Audio Settings"
+
 [node name="WaitingRoom" parent="." groups=["WaitingRoom"] instance=ExtResource("2_3c4uh")]
+visible = false
+
+[node name="AudioMenu" parent="." instance=ExtResource("7_bi3ke")]
 visible = false
 
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/NameTextbox" to="." method="_on_name_textbox_text_changed"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/TeamCheck" to="." method="_on_team_check_item_selected"]
 [connection signal="color_changed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/CitySizeButton" to="." method="_on_city_size_button_item_selected"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="MarginContainer/AudioSettingsButton" to="." method="_on_audio_settings_button_pressed"]
 [connection signal="pressed" from="WaitingRoom/MarginContainer/VBoxContainer/ReadyButton" to="." method="_on_ready_button_pressed"]
 
 [editable path="LobbyBackground"]

@@ -4,8 +4,8 @@
 [ext_resource type="ArrayMesh" uid="uid://b45oru3tx1hip" path="res://Player/Meshes/RobberCar.mesh" id="2_dmaj2"]
 [ext_resource type="ArrayMesh" uid="uid://be5adprxvcfl" path="res://Player/Meshes/PoliceCar.mesh" id="3_fqns6"]
 [ext_resource type="ArrayMesh" uid="uid://brv4b37ifgbfb" path="res://Player/Meshes/Tire.mesh" id="3_gaa44"]
-[ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="10_12i5b"]
 [ext_resource type="PackedScene" uid="uid://depddspqh081" path="res://Gui/Gui.tscn" id="10_ask5d"]
+[ext_resource type="Script" path="res://Player/Camera.gd" id="10_e3m6b"]
 [ext_resource type="PackedScene" uid="uid://dn8xgt3cyoho2" path="res://Player/Arrow/Arrow.tscn" id="11_a1bxi"]
 [ext_resource type="AudioStream" uid="uid://dms44k7vnemrf" path="res://SFX/siren.ogg" id="13_jche4"]
 [ext_resource type="AudioStream" uid="uid://ccenif7waj6ea" path="res://SFX/horn.ogg" id="13_r5aqf"]
@@ -250,12 +250,9 @@ autowrap_mode = 3
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 1.21669e-08, -8.6572e-08, 0, 0.990268, 0.139173, 8.74228e-08, 0.139173, -0.990268, 0, 3, -5)
-top_level = true
 doppler_tracking = 2
 current = true
-script = ExtResource("10_12i5b")
-target_path = NodePath("..")
-offset = Vector3(0, 2.5, -5)
+script = ExtResource("10_e3m6b")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Siren/ArestArea" to="." method="_on_arest_area_body_entered"]

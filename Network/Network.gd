@@ -1,3 +1,4 @@
+@tool
 extends Node
 
 const DEFAULT_IP = "127.0.0.1"
@@ -12,6 +13,9 @@ var selected_ip
 var selected_port
 var ready_players = 0
 var is_cop = false
+var city_size = Vector2()
+var prop_multiplier
+var world_seed
 
 signal player_disconnected
 signal server_disconnected
@@ -38,6 +42,7 @@ func add_to_player_list():
 	player_data = Save.save_data
 	players[local_player_id] = player_data
 	players[local_player_id]["is_cop"] = is_cop
+	players[local_player_id]["paint_color"] = Save.save_data["local_paint_color"]
 
 func _connected_to_server(_id):
 	add_to_player_list()

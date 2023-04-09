@@ -30,8 +30,10 @@ var player_data = {"steer": 0, "engine": 0, "brakes": 0,
 					"position": null, "speed": 0, "money": 0, "siren": false, "horn": false}
 
 func _ready():
+	paint_color = Network.players[int(str(name))]["paint_color"]
 	join_team()
 	label_car()
+	paint_car()
 	players[name] = player_data
 	players[name].position = transform
 	$Debug.text = str(name)
@@ -188,7 +190,6 @@ func manage_clients(id, steering_value, throttle, brakes, speed):
 func display_location():
 	var x = snapped(position.x, 1)
 	var z = snapped(position.z, 1)
-	
 	$Gui/Hud/ColorRect/VBoxContainer/Location.text = str(x) + ", " + str(z)
 
 func beacon_emptied():

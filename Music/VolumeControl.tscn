@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5y6f8b2sgc4h"]
+
+[ext_resource type="Script" path="res://Music/VolumeControl.gd" id="1_vmyhj"]
+
+[node name="VolumeControl" type="Node"]
+script = ExtResource("1_vmyhj")

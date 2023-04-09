@@ -1,10 +1,11 @@
 extends Node3D
 
 var paint:BaseMaterial3D
-var default_color = Color(0,0,0)
+var default_color
 
 func _ready() -> void:
 	make_material()
+	default_color = Color(Save.save_data["local_paint_color"])
 	apply_defaults()
 
 func pivot():

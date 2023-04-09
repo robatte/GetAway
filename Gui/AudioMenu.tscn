@@ -1,0 +1,122 @@
+[gd_scene load_steps=4 format=3 uid="uid://1ql4460craae"]
+
+[ext_resource type="Theme" uid="uid://buv5pymjub15j" path="res://Lobby/Lobby.tres" id="1_p4u3n"]
+[ext_resource type="Script" path="res://Gui/AudioMenu.gd" id="2_syoj6"]
+[ext_resource type="Texture2D" uid="uid://w0ly7hvr6rgv" path="res://Gui/BottomFrame.png" id="2_urggp"]
+
+[node name="AudioMenu" type="BoxContainer"]
+z_index = 1
+texture_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_p4u3n")
+script = ExtResource("2_syoj6")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRecShadow" type="ColorRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 0.721569)
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRecShadow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 100.0
+offset_right = 150.0
+grow_horizontal = 2
+
+[node name="ColorRect" type="ColorRect" parent="ColorRecShadow/CenterContainer"]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRecShadow/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRecShadow/CenterContainer/ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Titel" type="Label" parent="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Audio Options"
+horizontal_alignment = 1
+
+[node name="Separator" type="TextureRect" parent="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+texture = ExtResource("2_urggp")
+expand_mode = 2
+
+[node name="MasterSliderLabel" type="Label" parent="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Master Volume
+"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="MasterSlider" type="HSlider" parent="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -50.0
+max_value = 0.0
+value = -10.0
+
+[node name="MusicSliderLabel" type="Label" parent="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music Volume
+"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="MusicSlider" type="HSlider" parent="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -50.0
+max_value = 0.0
+value = -10.0
+
+[node name="SfxSliderLabel" type="Label" parent="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Sound Effects Volume
+"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="SfxSlider" type="HSlider" parent="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -50.0
+max_value = 0.0
+value = -10.0
+
+[node name="Separator2" type="TextureRect" parent="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+texture = ExtResource("2_urggp")
+expand_mode = 2
+
+[node name="DoneButton" type="Button" parent="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+action_mode = 0
+text = "Done"
+
+[connection signal="value_changed" from="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer/DoneButton" to="." method="_on_done_button_pressed"]

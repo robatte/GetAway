@@ -2,11 +2,11 @@
 extends GridMap
 
 @export_category("Map")
-@export var width = 10
-@export var height = 10
 @export var spacing = 2
 @export var erase_fraction = 0.15
-@export var Seed = 3
+
+var width
+var height
 
 # bitwise walls: north, south, east, west
 enum {N = 1, E = 2, S = 4, W = 8}
@@ -21,19 +21,23 @@ var cell_walls = {
 var plaza_tiles = [20, 22]
 
 func _ready():
-	print("Seed: #" + str(Seed))
-	if Seed != 0:
-		seed(Seed)
 	clear()
 	if Engine.is_editor_hint():
+		get_map_settings()
 		make_map_border()
 		make_map()
 		record_tile_position()
 	elif Network.local_player_id == 1:
+		get_map_settings()
 		make_map_border()
 		make_map()
 		record_tile_position()
 		rpc("send_ready")
+
+func get_map_settings():
+	width = Network.city_size.x
+	height = Network.city_size.y
+	seed(Network.world_seed)
 
 func make_map_border():
 	$Border.resize_border(cell_size.x, Vector2i(width, height))
