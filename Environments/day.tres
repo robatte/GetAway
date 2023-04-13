@@ -1,0 +1,32 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://ccdrejq8k7d34"]
+
+[ext_resource type="Texture2D" uid="uid://ds7y0pf3l3rx6" path="res://Environments/HDRI/shanghai_riverside_4k.hdr" id="1_w1q2g"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jyxrp"]
+panorama = ExtResource("1_w1q2g")
+
+[sub_resource type="Sky" id="Sky_ndsd7"]
+sky_material = SubResource("PanoramaSkyMaterial_jyxrp")
+
+[resource]
+background_mode = 2
+background_color = Color(0.87451, 0.862745, 0.811765, 1)
+sky = SubResource("Sky_ndsd7")
+ambient_light_source = 2
+ambient_light_color = Color(0.898039, 0.898039, 0.835294, 1)
+ambient_light_energy = 0.5
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_white = 2.0
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+glow_bloom = 0.5
+fog_light_energy = 2.11
+fog_density = 0.1153
+fog_sky_affect = 0.0
+volumetric_fog_anisotropy = 0.9
+volumetric_fog_length = 10.11
+volumetric_fog_sky_affect = 0.939

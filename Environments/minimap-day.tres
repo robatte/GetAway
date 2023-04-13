@@ -1,0 +1,22 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://duy1u64l8swck"]
+
+[ext_resource type="Texture2D" uid="uid://ds7y0pf3l3rx6" path="res://Environments/HDRI/shanghai_riverside_4k.hdr" id="1_bfd5b"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jyxrp"]
+panorama = ExtResource("1_bfd5b")
+
+[sub_resource type="Sky" id="Sky_ndsd7"]
+sky_material = SubResource("PanoramaSkyMaterial_jyxrp")
+
+[resource]
+background_mode = 1
+background_color = Color(0.509804, 0.486275, 0.4, 1)
+background_energy_multiplier = 1.5
+sky = SubResource("Sky_ndsd7")
+ambient_light_source = 2
+ambient_light_color = Color(0.898039, 0.898039, 0.835294, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+tonemap_white = 2.0
+sdfgi_use_occlusion = true
+glow_bloom = 0.5
