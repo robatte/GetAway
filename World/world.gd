@@ -11,8 +11,30 @@ var money_recovered = 0
 
 var cop_spawn_point: Vector3
 
+@export var desired_fps = 90
+const perf_measure_time = 3
+var perf_values = []
+var optimize_queue = [
+	{"task": "set_msaa", 		"value": 1},
+	{"task": "set_dof", 		"value": false},
+	{"task": "set_far_camera", 	"value": 1},
+	{"task": "set_reflections", "value": false},
+	{"task": "set_msaa", 		"value": 0},
+	{"task": "set_particles", 	"value": 1},
+	{"task": "set_far_camera",	"value": 0},
+	{"task": "set_particles", 	"value": 0},
+	{"task": "set_fsr_scale", 	"value": 3},
+	{"task": "set_fsr_scale",	"value": 2},
+]
+
 func _enter_tree():
 	get_tree().set_pause(true)
+	
+func _start():
+	await get_tree().create_timer(3, false).timeout
+	if Save.save_data["optimize_performance"]:
+		Helper.notify("Start optimizing graphic settings in order to achieve " + str(desired_fps) + "fps:")
+		$AccumulateFpsTimer.start()
 	
 func spawn_local_player():
 	var new_player = preload("res://Player/player.tscn").instantiate()
@@ -37,7 +59,14 @@ func unpause():
 	spawn_local_player()
 	rpc("spawn_remote_player", Network.local_player_id)
 	get_tree().set_pause(false)
-
+	if Network.environment == "res://Environments/night.tres":
+		$Sun.queue_free()
+	else:
+		get_tree().call_group("lights", "queue_free")
+		
+	get_tree().call_group("started", "_start")
+	
+	
 @rpc("any_peer", "call_remote", "reliable")
 func update_gamestate(stashed, recovered):
 	if multiplayer.is_server():
@@ -63,4 +92,30 @@ func _on_object_spawner_cop_spawn(location: Vector3) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("menu"):
-		$AudioMenu.show()
+		$InGameMenu.visible = !$InGameMenu.visible
+
+
+func _on_accumulate_fps_timer_timeout() -> void:
+	perf_values.append(Performance.get_monitor(Performance.TIME_FPS))
+	
+	if perf_values.size() >= perf_measure_time:
+		$AccumulateFpsTimer.stop()
+		var fps = 0.0
+		for val in perf_values:
+			fps += val
+		fps /= perf_values.size()
+		perf_values.clear()
+		if fps < desired_fps:
+			optimize_performance()
+		else:
+			get_tree().call_group("video", "set_optimize_performance", false, true)
+			Helper.notify("Check. Performance good :)")
+		
+func optimize_performance():
+	if optimize_queue.size() == 0:
+		Helper.notify("All performance optmizations done. Sorry.")
+	else:
+		var task = optimize_queue.pop_front()
+		get_tree().call_group("video", task.task, task.value, true)
+		$AccumulateFpsTimer.start()
+	

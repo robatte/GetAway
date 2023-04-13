@@ -230,7 +230,7 @@ script = ExtResource("1_3b0e5")
 [node name="Car1" type="RigidBody3D" parent="."]
 transform = Transform3D(-0.0366437, 0, -0.999328, 0, 1, 0, 0.999328, 0, -0.0366437, -6.37299, 0.255358, -6)
 collision_mask = 7
-mass = 400.0
+mass = 100.0
 sleeping = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Car1"]
@@ -259,7 +259,7 @@ shape = SubResource("BoxShape3D_mui6y")
 [node name="Car3" type="RigidBody3D" parent="."]
 transform = Transform3D(-0.0418757, 0, -0.999123, 0, 1, 0, 0.999123, 0, -0.0418757, 5.41043, 0.255358, -6)
 collision_mask = 7
-mass = 400.0
+mass = 100.0
 sleeping = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Car3"]
@@ -288,7 +288,7 @@ shape = SubResource("BoxShape3D_mui6y")
 [node name="Car2" type="RigidBody3D" parent="."]
 transform = Transform3D(0.0331552, 0, -0.99945, 0, 1, 0, 0.99945, 0, 0.0331552, -0.614953, 0.255358, -6.12396)
 collision_mask = 7
-mass = 400.0
+mass = 100.0
 sleeping = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Car2"]

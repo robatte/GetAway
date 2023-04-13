@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://csyb6ujgiwca5"]
 
 [ext_resource type="PackedScene" uid="uid://jd7xry7mjh76" path="res://Props/Dumpsters/DumpsterProp.tscn" id="1_ru4pu"]
 

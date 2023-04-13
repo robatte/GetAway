@@ -10,10 +10,20 @@ func get_data():
 	if not FileAccess.file_exists(SAVEGAME):
 		save_data = {
 			"Player_name": "Unnamed",
-			"local_paint_color": "ff6e2626",
+			"local_paint_color": "ff6e26",
 			"master_volume": -10,
 			"music_volume": -10,
-			"sfx_volume": -10
+			"sfx_volume": -10,
+			"dof": false,
+			"reflections": true,
+			"fog": false,
+			"particles": 1,
+			"far_camera": 1,
+			"fsr_scale": 4,
+			"show_fps": false,
+			"fullscreen": true,
+			"optimize_performance": true,
+			"msaa": 0,
 		}
 		save_game()
 		

@@ -29,3 +29,6 @@ func LogA(caller:String, msgA:Array):
 	print_rich("[color=green][" + caller + ":" + str(Network.local_player_id) +"]:[/color]")
 	for n in msgA:
 		print_rich("[indent] - " + str(n) + "[/indent]")
+		
+func notify(text: String, time = 6):
+	get_tree().call_group("Notifications", "notify", text, time)

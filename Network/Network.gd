@@ -14,8 +14,10 @@ var selected_port
 var ready_players = 0
 var is_cop = false
 var city_size = Vector2()
-var prop_multiplier
-var world_seed
+var prop_multiplier = 1
+var world_seed = 0
+var environment
+var minimap_environment
 
 signal player_disconnected
 signal server_disconnected
@@ -71,10 +73,11 @@ func update_waiting_room():
 	get_tree().call_group("WaitingRoom", "refresh_players", players)
 	
 func start_game():
-	rpc("load_world")
+	rpc("load_world", environment, minimap_environment)
 	
 @rpc("any_peer", "call_local", "reliable")
-func load_world():
-	Helper.Log("World", "load world")
+func load_world(selected_environment, selected_minimap_environment):
+	environment = selected_environment
+	minimap_environment = selected_minimap_environment
 	get_tree().change_scene_to_file("res://World/world.tscn")
 		

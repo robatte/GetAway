@@ -1,9 +1,9 @@
 extends BoxContainer
 
 func _ready() -> void:
-	$ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MasterSlider.value = Save.save_data["master_volume"]
-	$ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer/MusicSlider.value = Save.save_data["music_volume"]
-	$ColorRecShadow/CenterContainer/ColorRect/MarginContainer/VBoxContainer/SfxSlider.value = Save.save_data["sfx_volume"]
+	$ColorRect/MarginContainer/VBoxContainer/CenterContainer/MasterSlider.value = Save.save_data["master_volume"]
+	$ColorRect/MarginContainer/VBoxContainer/CenterContainer/MusicSlider.value = Save.save_data["music_volume"]
+	$ColorRect/MarginContainer/VBoxContainer/CenterContainer/SfxSlider.value = Save.save_data["sfx_volume"]
 	
 func _on_master_slider_value_changed(value: float) -> void:
 	VolumeControl.update_master_volume(value)

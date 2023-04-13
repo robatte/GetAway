@@ -1,7 +1,7 @@
 extends VehicleBody3D
 
 const MAX_STEER_ANGLE = 0.35
-const STEER_SPEED = 1
+const STEER_SPEED = 1.0
 
 const MAX_ENGINE_FORCE = 175
 const MAX_BREAK_FORCE = 10
@@ -16,7 +16,7 @@ var money = 0
 const money_drop = 50 
 const beacon_money = 1000
 
-@export var max_arrest_value = 150
+@export var max_arrest_value = 750
 
 var arrest_value = 0
 
@@ -36,20 +36,13 @@ func _ready():
 	paint_car()
 	players[name] = player_data
 	players[name].position = transform
-	$Debug.text = str(name)
-#	rpc("rpc_text")
 	if not is_local_Player():
 		$Camera.call_deferred("free")
 		$Gui/Hud.call_deferred("free")
 
-#	get_node("./PlayerBillboard/PlayerBillboardSubViewport/TextureProgressBar").max_value = max_arrest_value
-
 	Helper.Log("Player", "is ready")
 
-@rpc("any_peer", "call_remote", "reliable")	
-func rpc_text():
-	$Debug.text = "rpc"
-	
+
 func is_local_Player():
 	return name == str(Network.local_player_id)
 
@@ -177,6 +170,7 @@ func update_server(id, steering_value, throttle, brakes, speed):
 	else:
 		manage_clients(id, steering_value, throttle, brakes, speed)
 	get_tree().call_group("Interface", "update_speed", speed)
+	$Exhaust.update_particles(speed)
 	
 @rpc("any_peer", "call_local", "unreliable")
 func manage_clients(id, steering_value, throttle, brakes, speed):

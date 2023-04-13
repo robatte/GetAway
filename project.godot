@@ -13,7 +13,6 @@ config_version=5
 config/name="GetAway"
 run/main_scene="res://Lobby/lobby.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
-run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]
@@ -107,13 +106,8 @@ common/physics_ticks_per_second=120
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=2
 lights_and_shadows/directional_shadow/16_bits=false
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
-textures/default_filters/anisotropic_filtering_level=4
-camera/depth_of_field/depth_of_field_bokeh_quality=2
-textures/decals/filter=5
-textures/light_projectors/filter=5
 anti_aliasing/quality/msaa_2d=1
 anti_aliasing/quality/msaa_3d=1
 anti_aliasing/quality/screen_space_aa=1

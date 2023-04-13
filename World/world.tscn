@@ -1,20 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://x1d7685rmaff"]
+[gd_scene load_steps=8 format=3 uid="uid://x1d7685rmaff"]
 
 [ext_resource type="Script" path="res://World/world.gd" id="1_88sc4"]
-[ext_resource type="PackedScene" uid="uid://csjwqt3a1gcg0" path="res://World/world_environment.tscn" id="2_1fpx4"]
 [ext_resource type="MeshLibrary" uid="uid://blt3u4neb4ldp" path="res://Tiles/City-Update.meshlib" id="3_g65xc"]
 [ext_resource type="Script" path="res://World/CityGridMap.gd" id="4_klfod"]
 [ext_resource type="PackedScene" uid="uid://cons4iws235x2" path="res://World/border.tscn" id="5_lw4r6"]
 [ext_resource type="PackedScene" uid="uid://bh4jl8wyx0s61" path="res://World/ObjectSpawner.tscn" id="6_g1edk"]
+[ext_resource type="PackedScene" uid="uid://by27qtdu4rtcj" path="res://Gui/InGameMenu.tscn" id="7_f5pic"]
 [ext_resource type="PackedScene" uid="uid://b18m2v5fllyef" path="res://Props/Zeppelin/Zeppelin.tscn" id="7_x8f3f"]
-[ext_resource type="PackedScene" uid="uid://1ql4460craae" path="res://Gui/AudioMenu.tscn" id="8_6ub6l"]
 
-[node name="World" type="Node3D" groups=["GameState"]]
+[node name="World" type="Node3D" groups=["GameState", "started"]]
 script = ExtResource("1_88sc4")
 
 [node name="Players" type="Node" parent="."]
-
-[node name="WorldEnvironment" parent="." instance=ExtResource("2_1fpx4")]
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("3_g65xc")
@@ -31,7 +28,18 @@ metadata/_editor_floor_ = Vector3(0, -3, 0)
 [node name="Zeppelin " parent="." instance=ExtResource("7_x8f3f")]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -50, 75, -50)
 
-[node name="AudioMenu" parent="." instance=ExtResource("8_6ub6l")]
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.175792, -0.827361, -0.533452, 0.549549, -0.532072, 0.644124, -0.816758, -0.179926, 0.548209, 0, 160.334, 0)
+light_color = Color(1, 1, 0.894118, 1)
+light_indirect_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.015
+shadow_opacity = 0.9
+
+[node name="InGameMenu" parent="." instance=ExtResource("7_f5pic")]
 visible = false
 
+[node name="AccumulateFpsTimer" type="Timer" parent="."]
+
 [connection signal="cop_spawn" from="GridMap/ObjectSpawner" to="." method="_on_object_spawner_cop_spawn"]
+[connection signal="timeout" from="AccumulateFpsTimer" to="." method="_on_accumulate_fps_timer_timeout"]

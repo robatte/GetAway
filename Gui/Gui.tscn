@@ -150,6 +150,15 @@ libraries = {
 "": SubResource("AnimationLibrary_fo0dk")
 }
 
+[node name="FpsOverlay" type="Label" parent="Hud/ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "39fps"
+horizontal_alignment = 2
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="MarginContainer" type="MarginContainer" parent="Hud/ColorRect"]
 layout_mode = 1
 anchors_preset = 15
@@ -196,3 +205,20 @@ horizontal_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_ca8q6")
 }
+
+[node name="FpsTmer" type="Timer" parent="."]
+
+[node name="Notifications" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = -1.0
+offset_right = 150.0
+offset_bottom = -1.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+
+[connection signal="timeout" from="FpsTmer" to="." method="_on_fps_tmer_timeout"]

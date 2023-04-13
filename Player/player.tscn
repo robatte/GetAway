@@ -1,12 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://dlonyhjuam3uy"]
+[gd_scene load_steps=32 format=3 uid="uid://dlonyhjuam3uy"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_dqm6k"]
 [ext_resource type="ArrayMesh" uid="uid://b45oru3tx1hip" path="res://Player/Meshes/RobberCar.mesh" id="2_dmaj2"]
 [ext_resource type="ArrayMesh" uid="uid://be5adprxvcfl" path="res://Player/Meshes/PoliceCar.mesh" id="3_fqns6"]
 [ext_resource type="ArrayMesh" uid="uid://brv4b37ifgbfb" path="res://Player/Meshes/Tire.mesh" id="3_gaa44"]
+[ext_resource type="Environment" uid="uid://ccdrejq8k7d34" path="res://Environments/day.tres" id="10_2yupu"]
 [ext_resource type="PackedScene" uid="uid://depddspqh081" path="res://Gui/Gui.tscn" id="10_ask5d"]
 [ext_resource type="Script" path="res://Player/Camera.gd" id="10_e3m6b"]
 [ext_resource type="PackedScene" uid="uid://dn8xgt3cyoho2" path="res://Player/Arrow/Arrow.tscn" id="11_a1bxi"]
+[ext_resource type="Script" path="res://Player/Exhaust.gd" id="12_ibq5j"]
 [ext_resource type="AudioStream" uid="uid://dms44k7vnemrf" path="res://SFX/siren.ogg" id="13_jche4"]
 [ext_resource type="AudioStream" uid="uid://ccenif7waj6ea" path="res://SFX/horn.ogg" id="13_r5aqf"]
 [ext_resource type="PackedScene" uid="uid://qmucetjyw867" path="res://Player/PlayerBillboard/PlayerBillboard.tscn" id="14_2pv7i"]
@@ -76,6 +78,62 @@ _data = {
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ea8m0"]
 radius = 8.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_m1mig"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 60.0
+dof_blur_far_transition = -1.0
+dof_blur_amount = 0.05
+
+[sub_resource type="Gradient" id="Gradient_4fnta"]
+offsets = PackedFloat32Array(0.00621118, 0.555901, 0.993789)
+colors = PackedColorArray(0.0214347, 0.0214346, 0.0214346, 0.635294, 0.36283, 0.362829, 0.362829, 0.309804, 0.733005, 0.733005, 0.733005, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v2y6m"]
+gradient = SubResource("Gradient_4fnta")
+
+[sub_resource type="Curve" id="Curve_wv4mh"]
+_data = [Vector2(0, 0.163636), 0.0, 0.0, 0, 0, Vector2(1, 1), 2.00568, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_na4w7"]
+curve = SubResource("Curve_wv4mh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_il2hh"]
+direction = Vector3(0, 0, 1)
+spread = 15.0
+gravity = Vector3(0, 0.25, 0)
+initial_velocity_min = -5.0
+initial_velocity_max = -5.0
+damping_min = 1.0
+damping_max = 2.0
+scale_min = 0.1
+scale_max = 2.5
+scale_curve = SubResource("CurveTexture_na4w7")
+color = Color(1, 1, 1, 0.717647)
+color_ramp = SubResource("GradientTexture1D_v2y6m")
+turbulence_enabled = true
+turbulence_noise_strength = 2.0
+turbulence_influence_min = 0.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_o7hng"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ggbhb"]
+noise = SubResource("FastNoiseLite_o7hng")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icci5"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.490196, 0.490196, 0.490196, 1)
+albedo_texture = SubResource("NoiseTexture2D_ggbhb")
+metallic_specular = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_npf1p"]
+material = SubResource("StandardMaterial3D_icci5")
+radius = 0.25
+height = 0.5
+radial_segments = 8
+rings = 4
 
 [node name="Player" type="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.397382, 0)
@@ -163,7 +221,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 30,
 layers = 4
 light_energy = 3.0
 spot_range = 50.0
-spot_angle = 10.0
+spot_angle = 15.0
 
 [node name="Arrow" parent="." instance=ExtResource("11_a1bxi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.31877, -0.219633)
@@ -212,7 +270,6 @@ spot_angle = 40.0
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Siren"]
 stream = ExtResource("13_jche4")
-volume_db = -18.06
 max_distance = 200.0
 bus = &"SoundEffects"
 doppler_tracking = 2
@@ -242,17 +299,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5984, 0)
 
 [node name="Gui" parent="." instance=ExtResource("10_ask5d")]
 
-[node name="Debug" type="Label3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.887754, -2.18862)
-text = "Player"
-font_size = 24
-autowrap_mode = 3
-
-[node name="Camera" type="Camera3D" parent="."]
+[node name="Camera" type="Camera3D" parent="." groups=["Interface", "cameras"]]
 transform = Transform3D(-1, 1.21669e-08, -8.6572e-08, 0, 0.990268, 0.139173, 8.74228e-08, 0.139173, -0.990268, 0, 3, -5)
+environment = ExtResource("10_2yupu")
+attributes = SubResource("CameraAttributesPractical_m1mig")
 doppler_tracking = 2
 current = true
+far = 300.0
 script = ExtResource("10_e3m6b")
+follow_target = NodePath("../CamTarget")
+
+[node name="CamTarget" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4)
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." groups=["lights"]]
+transform = Transform3D(-1, 3.22296e-09, -1.50789e-07, -4.67315e-09, 0.99863, 0.052336, 1.50751e-07, 0.052336, -0.99863, 0.485154, 1.02781, 1.8967)
+light_color = Color(0.996078, 0.835294, 0.568627, 1)
+light_energy = 3.0
+shadow_enabled = true
+spot_range = 50.0
+spot_angle = 20.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="." groups=["lights"]]
+transform = Transform3D(-1, 3.22295e-09, -1.50789e-07, -4.67315e-09, 0.99863, 0.052336, 1.50751e-07, 0.052336, -0.99863, -0.485, 1.02799, 1.89701)
+light_color = Color(0.996078, 0.835294, 0.568627, 1)
+light_energy = 3.0
+shadow_enabled = true
+spot_range = 50.0
+spot_angle = 20.0
+
+[node name="Exhaust" type="GPUParticles3D" parent="." groups=["particles"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.233035, 0.297396, -1.80659)
+amount = 128
+lifetime = 2.0
+explosiveness = 0.23
+randomness = 1.0
+visibility_aabb = AABB(-4, -4, -4.26318, 8, 8, 8)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_il2hh")
+draw_pass_1 = SubResource("SphereMesh_npf1p")
+script = ExtResource("12_ibq5j")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Siren/ArestArea" to="." method="_on_arest_area_body_entered"]

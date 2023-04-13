@@ -6,12 +6,15 @@ extends CanvasLayer
 
 var isCop = false
 var city_size
+var environment = "res://Environments/night.tres"
+var minimap_environment = "res://Environments/minimap-night.tres"
 
 func _ready():
 	NameTextBox.text = Save.save_data["Player_name"]
 	SelectedIP.text = Network.DEFAULT_IP
 	SelectedPort.text = str(Network.DEFAULT_PORT)
 	_on_city_size_button_item_selected(1)
+	_on_time_check_item_selected(0)
 	$MarginContainer/VBoxContainer/CenterContainer/GridContainer/ColorPickerButton.color = Save.save_data["local_paint_color"]
 	
 func _on_host_button_pressed():
@@ -19,6 +22,8 @@ func _on_host_button_pressed():
 	Network.is_cop = isCop
 	Network.create_server()
 	Network.city_size = city_size
+	Network.environment = environment
+	Network.minimap_environment = minimap_environment
 	generate_city_seed()
 	get_tree().call_group("HostOnly", "show")
 	create_waiting_room()
@@ -95,6 +100,23 @@ func generate_city_seed():
 	else:
 		Network.world_seed = hash(world_seed)
 
+func _on_time_check_item_selected(index: int) -> void:
+	match index:
+		0:
+			environment = "res://Environments/night.tres"
+			minimap_environment = "res://Environments/minimap-night.tres"
+			$LobbyBackground/Sun.hide()
+			$LobbyBackground/Moon.show()
+			get_tree().call_group("lights", "show")
+		1: 
+			environment = "res://Environments/day.tres"
+			minimap_environment = "res://Environments/minimap-day.tres"
+			$LobbyBackground/Sun.show()
+			$LobbyBackground/Moon.hide()
+			get_tree().call_group("lights", "hide")
+			
+	$LobbyBackground/SubViewportContainer/SubViewport/Camera3D.environment = load(environment)
 
-func _on_audio_settings_button_pressed() -> void:
-	$AudioMenu.show()
+
+func _on_options_button_pressed() -> void:
+	$InGameMenu.visible = ! $InGameMenu.visible

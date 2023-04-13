@@ -1,0 +1,118 @@
+[gd_scene load_steps=6 format=3 uid="uid://by27qtdu4rtcj"]
+
+[ext_resource type="Theme" uid="uid://buv5pymjub15j" path="res://Lobby/Lobby.tres" id="1_1m374"]
+[ext_resource type="Script" path="res://Gui/InGameMenu.gd" id="2_nf8f0"]
+[ext_resource type="Texture2D" uid="uid://w0ly7hvr6rgv" path="res://Gui/BottomFrame.png" id="2_y5jwm"]
+[ext_resource type="PackedScene" uid="uid://1ql4460craae" path="res://Gui/AudioMenu.tscn" id="3_jxqkr"]
+[ext_resource type="PackedScene" uid="uid://b2ii1435ae0tl" path="res://Gui/VideoMenu.tscn" id="4_bya27"]
+
+[node name="InGameMenu" type="ReferenceRect"]
+custom_minimum_size = Vector2(510, 550)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -275.0
+offset_right = 250.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("1_1m374")
+border_color = Color(1, 1, 1, 1)
+editor_only = false
+script = ExtResource("2_nf8f0")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Titel" type="Label" parent="ColorRect/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Godot Getaway"
+horizontal_alignment = 1
+
+[node name="Separator" type="TextureRect" parent="ColorRect/MarginContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+texture = ExtResource("2_y5jwm")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AudioButton" type="Button" parent="ColorRect/MarginContainer/CenterContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+text = "Audio Options"
+
+[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VideoButton" type="Button" parent="ColorRect/MarginContainer/CenterContainer/VBoxContainer/CenterContainer2"]
+layout_mode = 2
+text = "Video Options"
+
+[node name="Separator2" type="TextureRect" parent="ColorRect/MarginContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+texture = ExtResource("2_y5jwm")
+expand_mode = 5
+stretch_mode = 4
+flip_v = true
+
+[node name="DoneButton" type="Button" parent="ColorRect/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Done!"
+
+[node name="AudioMenu" parent="ColorRect/MarginContainer/CenterContainer" instance=ExtResource("3_jxqkr")]
+visible = false
+layout_mode = 2
+
+[node name="VideoMenu" parent="ColorRect/MarginContainer/CenterContainer" instance=ExtResource("4_bya27")]
+visible = false
+custom_minimum_size = Vector2(500, 550)
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Quit Game"
+
+[connection signal="pressed" from="ColorRect/MarginContainer/CenterContainer/VBoxContainer/CenterContainer/AudioButton" to="." method="_on_audio_button_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/CenterContainer/VBoxContainer/CenterContainer2/VideoButton" to="." method="_on_video_button_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/CenterContainer/VBoxContainer/DoneButton" to="." method="_on_done_button_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+
+[editable path="ColorRect/MarginContainer/CenterContainer/AudioMenu"]
+[editable path="ColorRect/MarginContainer/CenterContainer/VideoMenu"]
