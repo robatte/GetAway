@@ -15,6 +15,7 @@ var paint_color = Color(1, 1, 0)
 var money = 0
 const money_drop = 50 
 const beacon_money = 1000
+var penalize_collision = true
 
 @export var max_arrest_value = 750
 
@@ -40,8 +41,7 @@ func _ready():
 		$Camera.call_deferred("free")
 		$Gui/Hud.call_deferred("free")
 
-	Helper.Log("Player", "is ready")
-
+#	Helper.Log("Player", "is ready")
 
 func is_local_Player():
 	return name == str(Network.local_player_id)
@@ -205,7 +205,7 @@ func update_money(id, cash):
 	else:
 		rpc_id(int(str(id)), "display_money", cash)
 	
-@rpc("any_peer", "reliable")
+@rpc("any_peer", "call_remote", "reliable")
 func display_money(cash):
 	money = players[name].money
 	$Gui/Hud/ColorRect/VBoxContainer/MoneyLabel/AnimationPlayer.play("MoneyPulse")
@@ -222,11 +222,13 @@ func money_delivered():
 func _on_body_entered(body: Node) -> void:
 	if body.has_node("Money"):
 		body.queue_free()
-		money += money_drop
+		money += money_drop	
 		if is_in_group("cops"):
 			get_tree().call_group("GameState", "update_gamestate", 0, money)
 		manage_money()
-	elif money > 0 and not is_in_group("cops"):
+	elif penalize_collision and (money > 0) and not is_in_group("cops"):
+		penalize_collision = false
+		$CollisionPenalizeTimer.start()
 		spawn_money()
 		money -= money_drop
 		manage_money()
@@ -283,3 +285,7 @@ func increment_arrest_value():
 	if arrest_value == max_arrest_value:
 		get_tree().call_group("Announcements", "victory", false)
 
+
+
+func _on_collision_penalize_timer_timeout() -> void:
+	penalize_collision = true

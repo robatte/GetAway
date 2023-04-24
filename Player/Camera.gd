@@ -73,7 +73,7 @@ func check_saved_settings():
 	dof_blur()
 	ssr()
 	far_camera()
-#	fsr_scaling()
+	fsr_scaling()
 
 
 func far_camera():
@@ -104,4 +104,4 @@ func fsr_scaling():
 #	await get_tree().process_frame 
 #	await RenderingServer.frame_post_draw
 	get_tree().get_root().scaling_3d_scale = fsr_scale
-	RenderingServer.viewport_set_scaling_3d_scale(get_tree().get_root().get_viewport_rid(), fsr_scale)
+#	RenderingServer.viewport_set_scaling_3d_scale(get_tree().get_root().get_viewport_rid(), fsr_scale)

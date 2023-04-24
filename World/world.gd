@@ -17,16 +17,18 @@ var perf_values = []
 var optimize_queue = [
 	{"task": "set_msaa", 		"value": 1},
 	{"task": "set_dof", 		"value": false},
+	{"task": "set_fsr_scale", 	"value": 3},
 	{"task": "set_far_camera", 	"value": 1},
 	{"task": "set_reflections", "value": false},
+	{"task": "set_fsr_scale",	"value": 2},
 	{"task": "set_msaa", 		"value": 0},
 	{"task": "set_particles", 	"value": 1},
 	{"task": "set_far_camera",	"value": 0},
 	{"task": "set_particles", 	"value": 0},
-	{"task": "set_fsr_scale", 	"value": 3},
-	{"task": "set_fsr_scale",	"value": 2},
+	{"task": "set_fsr_scale",	"value": 1},
 ]
 
+	
 func _enter_tree():
 	get_tree().set_pause(true)
 	
@@ -44,6 +46,17 @@ func spawn_local_player():
 	if Network.is_cop:
 		await get_tree().process_frame
 		new_player.position = cop_spawn_point
+
+func remove_player(id):
+	rpc("_remove_player", id)
+	
+@rpc("call_local", "reliable")
+func _remove_player(id):
+	var player_to_remove = $Players.get_node(str(int(id)))
+	if player_to_remove:
+		Helper.Log("World", "Remove Player #" + str(player_to_remove))
+		$Players.remove_child(player_to_remove)
+		player_to_remove.queue_free()
 
 @rpc("any_peer", "reliable")
 func spawn_remote_player(id):

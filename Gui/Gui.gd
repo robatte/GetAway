@@ -2,6 +2,7 @@ extends Control
 
 @onready var debug_overlay_list = $DebugItemList
 @onready var notifications = $Notifications
+@onready var fps_overlay = $Hud/ColorRect/VBoxContainer/FpsOverlay
 
 func _ready() -> void:
 #	Helper.Log("[color=yellow]Gui[/color]", "ready")
@@ -9,6 +10,7 @@ func _ready() -> void:
 	$Announcer.add_to_group("Announcements")
 	add_to_group("Notifications")
 	show_fps()
+	$ScrollContainer/Console.clear()
 
 func _process(_delta: float) -> void:
 	if is_instance_valid($DebugItemList) and $DebugItemList.visible:
@@ -20,11 +22,7 @@ func _process(_delta: float) -> void:
 func _input(event):
 	if event.is_action_released("console") and $DebugItemList != null:
 		$DebugItemList.visible = !$DebugItemList.visible
-	elif event.is_action_released("debug"):
-		var text = "lalaslsla "
-		for n in range(randi() % 10): text += "mehr text "
-		notify(text)
-
+	
 
 func show_fps():
 	if Save.save_data["show_fps"]:
@@ -32,10 +30,11 @@ func show_fps():
 		$FpsTmer.start()
 	else:
 		$Hud/ColorRect/VBoxContainer/FpsOverlay.visible = false
-		$FpsTmer.start()
+		$FpsTmer.stop()
 
 func _on_fps_tmer_timeout() -> void:
-	$Hud/ColorRect/VBoxContainer/FpsOverlay.text = str(Performance.get_monitor(Performance.TIME_FPS)) + "fps"
+	if fps_overlay != null:
+		fps_overlay.text = str(Performance.get_monitor(Performance.TIME_FPS)) + "fps"
 
 func notify(text: String, time = 6):
 	var note = Label.new()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhmlpponf2pxn"]
+[gd_scene load_steps=15 format=3 uid="uid://bhmlpponf2pxn"]
 
 [ext_resource type="Theme" uid="uid://buv5pymjub15j" path="res://Lobby/Lobby.tres" id="1_v7uyf"]
 [ext_resource type="PackedScene" uid="uid://qs2a81rid3bj" path="res://Lobby/WaitingRoom.tscn" id="2_3c4uh"]
@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://bsiy461172t6g" path="res://Gui/Moon.svg" id="6_uoe2w"]
 [ext_resource type="Texture2D" uid="uid://dyg2yo1o06tgm" path="res://Gui/Sun.svg" id="7_66dkj"]
 [ext_resource type="Texture2D" uid="uid://dj4oyf7gw54s5" path="res://Gui/Options.svg" id="8_dwc5n"]
+[ext_resource type="FontFile" uid="uid://csms5muti20gx" path="res://Fonts/riesling.ttf" id="9_jbr5q"]
 [ext_resource type="PackedScene" uid="uid://by27qtdu4rtcj" path="res://Gui/InGameMenu.tscn" id="10_4of0w"]
+[ext_resource type="Script" path="res://Lobby/Console.gd" id="12_fc7lv"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_v1asl"]
 device = -1
@@ -18,7 +20,7 @@ keycode = 4194305
 [sub_resource type="Shortcut" id="Shortcut_r4taw"]
 events = [SubResource("InputEventKey_v1asl")]
 
-[node name="Lobby" type="CanvasLayer"]
+[node name="Lobby" type="CanvasLayer" groups=["Lobby"]]
 script = ExtResource("2_r2oh1")
 
 [node name="LobbyBackground" parent="." instance=ExtResource("3_hwlxt")]
@@ -31,6 +33,23 @@ transform = Transform3D(0.997946, 0, 0.064062, 0, 1, 0, -0.064062, 0, 0.997946, 
 
 [node name="Shops 2" parent="LobbyBackground" index="12"]
 transform = Transform3D(-0.302619, 0, -0.953111, 0, 1, 0, 0.953111, 0, -0.302619, -54.7683, 0, 40.6686)
+
+[node name="PlayerLabel" type="Label" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_shadow_color = Color(0.443137, 0.054902, 0.054902, 0.929412)
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("9_jbr5q")
+theme_override_font_sizes/font_size = 60
+text = "Player's Garage"
+horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -48,29 +67,46 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Lobby"
+theme_override_colors/font_shadow_color = Color(0.443137, 0.054902, 0.054902, 1)
+theme_override_colors/font_outline_color = Color(0.443137, 0.054902, 0.054902, 0.870588)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 60
+text = "Godot Getaway"
 horizontal_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/CenterContainer3"]
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Join Game"
+popup/item_0/id = 0
+popup/item_1/text = "Host Game"
+popup/item_1/id = 1
+
+[node name="Grid" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/CenterContainer"]
-layout_mode = 2
+size_flags_vertical = 2
 theme_override_constants/h_separation = 16
+columns = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/Grid"]
+layout_mode = 2
+theme_override_constants/h_separation = 14
 theme_override_constants/v_separation = 8
 columns = 2
 
-[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/Grid/GridContainer"]
 layout_mode = 2
 text = "Name"
 horizontal_alignment = 2
 
-[node name="NameTextbox" type="LineEdit" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="NameTextbox" type="LineEdit" parent="MarginContainer/VBoxContainer/Grid/GridContainer"]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 text = "Robs"
@@ -78,12 +114,12 @@ alignment = 1
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="IPLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="IPLabel" type="Label" parent="MarginContainer/VBoxContainer/Grid/GridContainer" groups=["ClientOnly"]]
 layout_mode = 2
 text = "IP"
 horizontal_alignment = 2
 
-[node name="IPTextbox" type="LineEdit" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="IPTextbox" type="LineEdit" parent="MarginContainer/VBoxContainer/Grid/GridContainer" groups=["ClientOnly"]]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 text = "127.0.0.1"
@@ -91,12 +127,12 @@ alignment = 1
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="PortLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="PortLabel" type="Label" parent="MarginContainer/VBoxContainer/Grid/GridContainer"]
 layout_mode = 2
 text = "Port"
 horizontal_alignment = 2
 
-[node name="PortTextbox" type="LineEdit" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="PortTextbox" type="LineEdit" parent="MarginContainer/VBoxContainer/Grid/GridContainer"]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 text = "32023"
@@ -104,13 +140,20 @@ alignment = 1
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="TeamLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="TeamLabel" type="Label" parent="MarginContainer/VBoxContainer/Grid/GridContainer"]
 layout_mode = 2
 text = "Team"
 horizontal_alignment = 2
 
-[node name="TeamCheck" type="ItemList" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="TeamCheck" type="ItemList" parent="MarginContainer/VBoxContainer/Grid/GridContainer"]
 layout_mode = 2
+tooltip_text = "Change your team.
+Criminal: 
+Collect money by solving the yellow beacons.
+Bring back enough money the the blue beacon to win.
+Police:
+Find the criminals! 
+Stay near them with your siren turned on to catch them and win."
 auto_height = true
 item_count = 2
 max_columns = 2
@@ -123,12 +166,12 @@ item_0/icon = ExtResource("4_obx8a")
 item_1/text = ""
 item_1/icon = ExtResource("5_ylv3g")
 
-[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer/Grid/GridContainer" groups=["HostOnly"]]
 layout_mode = 2
-text = "Daytime"
+text = "Time of Day"
 horizontal_alignment = 2
 
-[node name="TimeCheck" type="ItemList" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="TimeCheck" type="ItemList" parent="MarginContainer/VBoxContainer/Grid/GridContainer" groups=["HostOnly"]]
 custom_minimum_size = Vector2(0, 68)
 layout_mode = 2
 auto_height = true
@@ -144,21 +187,22 @@ item_0/icon = ExtResource("6_uoe2w")
 item_1/text = ""
 item_1/icon = ExtResource("7_66dkj")
 
-[node name="ColorLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="ColorLabel" type="Label" parent="MarginContainer/VBoxContainer/Grid/GridContainer"]
 layout_mode = 2
 text = "Car Colour"
 horizontal_alignment = 2
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="ColorPickerButton" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/Grid/GridContainer"]
+custom_minimum_size = Vector2(0, 43)
 layout_mode = 2
 edit_alpha = false
 
-[node name="CitySizeLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="CitySizeLabel" type="Label" parent="MarginContainer/VBoxContainer/Grid/GridContainer" groups=["HostOnly"]]
 layout_mode = 2
 text = "City Size"
 horizontal_alignment = 2
 
-[node name="CitySizeButton" type="OptionButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="CitySizeButton" type="OptionButton" parent="MarginContainer/VBoxContainer/Grid/GridContainer" groups=["HostOnly"]]
 layout_mode = 2
 alignment = 1
 item_count = 4
@@ -172,25 +216,33 @@ popup/item_2/id = 2
 popup/item_3/text = "Huge"
 popup/item_3/id = 3
 
-[node name="CitySeedLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="CitySeedLabel" type="Label" parent="MarginContainer/VBoxContainer/Grid/GridContainer" groups=["HostOnly"]]
 layout_mode = 2
 text = "City Seed"
 horizontal_alignment = 2
 
-[node name="CitySeed" type="LineEdit" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="CitySeed" type="LineEdit" parent="MarginContainer/VBoxContainer/Grid/GridContainer" groups=["HostOnly"]]
 layout_mode = 2
+tooltip_text = "The same alphanumeric text will generate the same level again and again.
+Leave it empty to generate a random one."
 placeholder_text = "Same seed generates the same city"
 alignment = 1
 clear_button_enabled = true
 
-[node name="HostButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="WaitingRoom" parent="MarginContainer/VBoxContainer/Grid" instance=ExtResource("2_3c4uh")]
 layout_mode = 2
-text = " Host Game "
+size_flags_horizontal = 8
+size_flags_vertical = 0
 
-[node name="JoinButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Join
-"
+size_flags_vertical = 2
+
+[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer2"]
+visible = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Play Game!"
 
 [node name="OptionsButton" type="Button" parent="MarginContainer"]
 layout_mode = 2
@@ -201,9 +253,6 @@ shortcut = SubResource("Shortcut_r4taw")
 text = "Options"
 icon = ExtResource("8_dwc5n")
 alignment = 0
-
-[node name="WaitingRoom" parent="." groups=["WaitingRoom"] instance=ExtResource("2_3c4uh")]
-visible = false
 
 [node name="InGameMenu" parent="." instance=ExtResource("10_4of0w")]
 visible = false
@@ -217,15 +266,37 @@ offset_bottom = 580.0
 grow_vertical = 1
 size_flags_horizontal = 8
 
-[connection signal="text_changed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/NameTextbox" to="." method="_on_name_textbox_text_changed"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/TeamCheck" to="." method="_on_team_check_item_selected"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/TimeCheck" to="." method="_on_time_check_item_selected"]
-[connection signal="color_changed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/CitySizeButton" to="." method="_on_city_size_button_item_selected"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/HostButton" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/CenterContainer/GridContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -112.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="Console" type="ItemList" parent="ScrollContainer" groups=["Console"]]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+auto_height = true
+item_count = 2
+same_column_width = true
+item_0/text = "lalalal"
+item_1/text = "2. zeile"
+script = ExtResource("12_fc7lv")
+
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/CenterContainer3/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/Grid/GridContainer/NameTextbox" to="." method="_on_name_textbox_text_changed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/Grid/GridContainer/TeamCheck" to="." method="_on_team_check_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/Grid/GridContainer/TimeCheck" to="." method="_on_time_check_item_selected"]
+[connection signal="color_changed" from="MarginContainer/VBoxContainer/Grid/GridContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/Grid/GridContainer/CitySizeButton" to="." method="_on_city_size_button_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CenterContainer2/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="WaitingRoom/MarginContainer/VBoxContainer/ReadyButton" to="." method="_on_ready_button_pressed"]
 
 [editable path="LobbyBackground"]
-[editable path="WaitingRoom"]
+[editable path="MarginContainer/VBoxContainer/Grid/WaitingRoom"]

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dunjtkadfts2m" path="res://Gui/pin.svg" id="4_7lxhr"]
 [ext_resource type="Texture2D" uid="uid://bgk2040ne7lxy" path="res://Gui/pin-off.svg" id="5_u2vm3"]
 
-[node name="VideoMenu" type="BoxContainer" groups=["started", "video"]]
+[node name="VideoMenu" type="BoxContainer" groups=["Hud", "started", "video"]]
 z_index = 1
 texture_filter = 2
 anchors_preset = 8
@@ -71,6 +71,8 @@ columns = 3
 
 [node name="FullscreenLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+tooltip_text = "Toggles Fullscreen / Windowed."
+mouse_filter = 1
 text = "Fullscreen"
 horizontal_alignment = 2
 vertical_alignment = 2
@@ -79,17 +81,23 @@ vertical_alignment = 2
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 1
 flat = true
 alignment = 1
 
 [node name="FullscreenValueLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_font_sizes/font_size = 20
 text = "Off"
 vertical_alignment = 2
 
 [node name="OptimizeLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+tooltip_text = "At the game starts,  the video settings are gradually reduced
+in order to reach a certain frames per second.
+When done, this option will be set off automatically."
+mouse_filter = 1
 text = "Optimize Settings InGame"
 horizontal_alignment = 2
 vertical_alignment = 2
@@ -98,17 +106,21 @@ vertical_alignment = 2
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 1
 flat = true
 alignment = 1
 
 [node name="OptimizeValueLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_font_sizes/font_size = 20
 text = "Off"
 vertical_alignment = 2
 
 [node name="DofLabel2" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+tooltip_text = "Will blur distant objects to produce a photografically effect."
+mouse_filter = 1
 text = "Depth of Field"
 horizontal_alignment = 2
 vertical_alignment = 2
@@ -117,17 +129,21 @@ vertical_alignment = 2
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 1
 flat = true
 alignment = 1
 
 [node name="DofValueLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_font_sizes/font_size = 20
 text = "Off"
 vertical_alignment = 2
 
 [node name="ReflectionLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+tooltip_text = "Toggles reflections between reflective objects."
+mouse_filter = 1
 text = "Reflections
 "
 horizontal_alignment = 2
@@ -137,17 +153,21 @@ vertical_alignment = 2
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 1
 flat = true
 alignment = 1
 
 [node name="ReflectionsValueLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_font_sizes/font_size = 20
 text = "Off"
 vertical_alignment = 2
 
 [node name="ParticlesLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+tooltip_text = "Set the amount of used particles for smoke, water etc."
+mouse_filter = 1
 text = "Particles
 "
 horizontal_alignment = 2
@@ -156,6 +176,10 @@ vertical_alignment = 2
 [node name="ParticlesCheck" type="HSlider" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+tooltip_text = "Off: No smoke, no water
+1: reduced amount of particles used
+2: as the chef recommends"
+mouse_filter = 1
 max_value = 2.0
 scrollable = false
 tick_count = 3
@@ -163,12 +187,15 @@ ticks_on_borders = true
 
 [node name="ParticlesValueLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_font_sizes/font_size = 20
 text = "Off"
 vertical_alignment = 2
 
 [node name="HighDistanceLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+tooltip_text = "Set the view distance of the camera."
+mouse_filter = 1
 text = "Camera Distance"
 horizontal_alignment = 2
 vertical_alignment = 2
@@ -176,6 +203,7 @@ vertical_alignment = 2
 [node name="HighDistanceCheck" type="HSlider" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 1
 max_value = 2.0
 value = 1.0
 scrollable = false
@@ -185,12 +213,15 @@ ticks_on_borders = true
 [node name="HighDistanceValueLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 custom_minimum_size = Vector2(74, 0)
 layout_mode = 2
+mouse_filter = 1
 theme_override_font_sizes/font_size = 20
 text = "Far Enough"
 vertical_alignment = 2
 
 [node name="MSAALabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+tooltip_text = "Set the value of multisample anti-aliasing to reduce pixelated edges."
+mouse_filter = 1
 text = "MSAA"
 horizontal_alignment = 2
 vertical_alignment = 2
@@ -198,6 +229,11 @@ vertical_alignment = 2
 [node name="MSAACheck" type="HSlider" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+tooltip_text = "0: no anti-aliasing
+2: good, balanced
+4: high and expensive
+8: if you've got it, you've got it"
+mouse_filter = 1
 max_value = 3.0
 scrollable = false
 tick_count = 4
@@ -205,12 +241,16 @@ ticks_on_borders = true
 
 [node name="MSAAValueLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_font_sizes/font_size = 20
 text = "4"
 vertical_alignment = 2
 
 [node name="FSRLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+tooltip_text = "Will render at a lower resolution and upscale the final wih a lot of magic. 
+The killer setting to gain more fps at low cost of reduced quality."
+mouse_filter = 1
 text = "FidelityFX Super Resolution"
 horizontal_alignment = 2
 vertical_alignment = 2
@@ -218,6 +258,11 @@ vertical_alignment = 2
 [node name="FSRCheck" type="HSlider" parent="ColorRect/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+tooltip_text = "Native: renders in your resolution. Best quality
+Ultra: hard to see reduced quality. Noticeable performance boost
+High: more performance, little bit less quality
+balanced: good enough to play fast
+"
 max_value = 4.0
 value = 4.0
 scrollable = false
@@ -252,6 +297,7 @@ offset_top = 4.0
 offset_right = 95.0
 offset_bottom = 47.0
 size_flags_vertical = 0
+tooltip_text = "Toggles the visibillity of a FPS counter below the minimap."
 theme = ExtResource("1_h38af")
 theme_override_constants/h_separation = 7
 theme_override_icons/checked = ExtResource("4_7lxhr")

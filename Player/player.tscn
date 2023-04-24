@@ -340,7 +340,12 @@ process_material = SubResource("ParticleProcessMaterial_il2hh")
 draw_pass_1 = SubResource("SphereMesh_npf1p")
 script = ExtResource("12_ibq5j")
 
+[node name="CollisionPenalizeTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Siren/ArestArea" to="." method="_on_arest_area_body_entered"]
 [connection signal="body_exited" from="Siren/ArestArea" to="." method="_on_arest_area_body_exited"]
 [connection signal="finished" from="AudioStreamPlayer3DHorn" to="." method="_on_audio_stream_player_3d_horn_finished"]
+[connection signal="timeout" from="CollisionPenalizeTimer" to="." method="_on_collision_penalize_timer_timeout"]

@@ -22,6 +22,7 @@ grow_vertical = 2
 size_flags_vertical = 3
 theme = ExtResource("1_1m374")
 border_color = Color(1, 1, 1, 1)
+border_width = 1.5
 editor_only = false
 script = ExtResource("2_nf8f0")
 metadata/_edit_use_anchors_ = true
@@ -109,10 +110,17 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "Quit Game"
 
+[node name="RestartButton" type="Button" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "End Game"
+
 [connection signal="pressed" from="ColorRect/MarginContainer/CenterContainer/VBoxContainer/CenterContainer/AudioButton" to="." method="_on_audio_button_pressed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/CenterContainer/VBoxContainer/CenterContainer2/VideoButton" to="." method="_on_video_button_pressed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/CenterContainer/VBoxContainer/DoneButton" to="." method="_on_done_button_pressed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 
 [editable path="ColorRect/MarginContainer/CenterContainer/AudioMenu"]
 [editable path="ColorRect/MarginContainer/CenterContainer/VideoMenu"]

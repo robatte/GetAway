@@ -175,5 +175,5 @@ func _on_visibility_changed() -> void:
 func _on_fps_toggled(button_pressed: bool) -> void:
 	Save.save_data["show_fps"] = button_pressed
 	Save.save_game()
-	get_tree().call_group("huds", "show_fps")
+	get_tree().call_group("Hud", "show_fps")
 

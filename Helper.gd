@@ -10,7 +10,6 @@ func fade_out(node, time = 3):
 	return await TW.finished
 
 func activate_collision(node:Node3D):
-#	print("activate " + str(node))
 	var prop_nodes = node.find_children("", "RigidBody3D") as Array[RigidBody3D]
 	for child in prop_nodes:
 		child.sleeping = true
@@ -24,6 +23,7 @@ func deactivate_collision(node:Node3D):
 
 func Log(caller:String, msg:String):
 	print_rich("[color=green][" + caller + ":" + str(Network.local_player_id) +"]:[/color]" + msg)
+	get_tree().call_group("Console", "console_log", "[" + caller + ":" + str(Network.local_player_id) +"]:" + msg)
 
 func LogA(caller:String, msgA:Array):
 	print_rich("[color=green][" + caller + ":" + str(Network.local_player_id) +"]:[/color]")
